@@ -1,0 +1,42 @@
+{
+    "*ID":5,
+    "*RepositoryURL": "https:www.github.com/ciselab/rhodos",
+    "*Repository":"Ciselab/Rhodos",
+    "*Licence":"MIT",
+    "*FaultCommit":"xxx",
+    "*FixCommit":"yyy",
+    
+    "JavaVersion":9,
+
+    "TestPatch":true,
+    "Description": "Input Sanitazion missing - divides by zero",
+    "Categories" : ["Sanitazion", "DivideByZero"], 
+    
+    "RelatedIssues" : ["https:www.github.com/ciselab/rhodos/issues/1"],
+    "RelatedPRs" : ["https:www.github.com/ciselab/rhodos/issues/2"],
+    
+    "FaultLocations" : [
+    {
+        "*startline": 5,
+        "*endline": 15,
+        "*file" : "./project/.../program.java",
+        "class" : "fully.qualified.package.program",
+        "method": "Main(String[])"
+    },{
+        "*startline": 25,
+        "*endline": 35,
+        "*file" : "./project/.../program.java",
+        "class" : "fully.qualified.package.program",
+        "method": "helper()"
+    }
+    ],
+    "FixLocations" : [
+    {
+        "*startline": 5,
+        "*endline": 20,
+        "*file" : "./project/.../program.java",
+        "class" : "fully.qualified.package.program",
+        "method": "Main(String[])"
+    }
+    ]
+}
