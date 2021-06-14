@@ -2,7 +2,7 @@
 
 To be done 
 
-- [] Run all .sh in references and put their results in data
+- [] Run all .sh in references and put their results in data (with a given depth of git-history)
 - [] Dependencies to do so 
 - [] Docker compose to run the same on windows / any machine 
 - [] Script to merge the datapoint.js to dataset.js

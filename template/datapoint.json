@@ -7,6 +7,8 @@
     "*FixCommit":"yyy",
     
     "JavaVersion":9,
+    "BuildFramework":"Maven",
+    "TestFrameworks" : ["JUnit"],
 
     "TestPatch":true,
     "Description": "Input Sanitazion missing - divides by zero",

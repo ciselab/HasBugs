@@ -47,7 +47,10 @@ A single datapoint can contain the following attributes (required attributes are
     "*Licence":"MIT",
     "*FaultCommit":"xxx",
     "*FixCommit":"yyy",
+
     "JavaVersion":9,
+    "BuildFramework":"Maven",
+    "TestFrameworks" : ["JUnit"],
 
     "TestPatch":true,
     "Description": "Input Sanitazion missing - divides by zero",
@@ -94,7 +97,7 @@ For a few more sentences on the datapoint fields and the commits see [datapoint-
 
 ## Inclusion Criteria 
 
-- Java >= 9
+- Java >= 8 
 - Junit Tests 
 - Projects run with a single `mvn test` or `gradle build` (low magic fantasy-setting)
 - buggy version newer than 2018
