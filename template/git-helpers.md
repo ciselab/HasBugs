@@ -33,7 +33,9 @@ Step 6: While in the testRegression-branch run `git format-patch bugCommitHash` 
 
 Step 1: Go to the project with history, keep the bugCommit and fixCommit in mind
 
-Step 2: Run `git format-patch bugCommit^..fixCommit --stdout > totalDiff.patch`
+Step 2: Run `git format-patch bugCommit..fixCommit --stdout > totalDiff.patch`
+
+You optionally can use `bugCommit^`, that means to include the changes introduced by the bug commit to the totalDiffPatch
 
 ## Applying Git Patches 
 

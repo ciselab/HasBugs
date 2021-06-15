@@ -2,15 +2,14 @@
 
 > "Hic Rhodus, Hic Salva"
 > (Here is Rhodes, here you can jump)
-> - Äsop
+> --- Äsop
 
 Welcome to the Rhodos Benchmark. 
 We try to provide a fresh dataset in the fashion of [Defects4J](https://github.com/rjust/defects4j) to evaluate tasks such as fault localization, program repair and test generation.
 Within the Dataset, we specialize on Machine-Learning Projects, as they have a set of interesting properties: 
 
-- Usually libraries (less IO and Runtime-Based errors)
 - High amount of computation and maths, often as *pure functions* 
-- Less dependencies, less internal coupling
+- Less dependencies, less coupling
 - Building bricks for modern applications
 - ML is of high interest at the moment
 
@@ -19,7 +18,7 @@ Instead of just providing the commits, we learned from some of the datasets out 
 - A failing CI does not mean a bug - atleast not certainly from the code. Hence, our bug-points are aknowledged by the project-maintainers through PRs and Issues.
 - Similarly, the Fix is what the maintainers consider fixed (even if that is removal of a feature).
 - For the test-cases we provide, we try to get feedback from the maintainers whether they can be considered an accurate test-case. We do so by PR to their project.  
-- As research by [Martin Montperus](https://link.springer.com/article/10.1007/s10664-016-9470-4) showed, not all found patches in program repair actually help despite passing the test-suite. 
+- As research by [Martin Monperrus](https://link.springer.com/article/10.1007/s10664-016-9470-4) showed, not all found patches in program repair actually help despite passing the test-suite. 
   To help with the inspection of potential tasks, we look into the material provided (code, issues, project readme/architecture) to give a simple estimate of "what is buggy".
   We hope that this helps to easier distinguish actually good result from e.g. overfitting.
 - We can express multiple bug and fix locations in the datapoint
@@ -41,7 +40,7 @@ A single datapoint can contain the following attributes (required attributes are
 
 ```JSON
 {
-    "*ID":5,
+    "*ID":42,
     "*RepositoryURL": "https:www.github.com/ciselab/rhodos",
     "*Repository":"Ciselab/Rhodos",
     "*Licence":"MIT",
@@ -91,7 +90,7 @@ For a few more sentences on the datapoint fields and the commits see [datapoint-
 ## Layout 
 
 - The folder `./references` contains the items to pull and setup a single datapoint. They are organized by `./references/repository/id`.
-- `./template` contains a set of a copy-pastable entry to make new references. 
+- `./template` contains a set of a copy-pastable entry to make new references. Also, it holds [instructions how to work with git patches](./template/git-helpers.md).
 - The folder `./tools` contains helpers to organize the references, e.g. to pull all datapoints or remove them.
 - The folder `./data` contains the actual projects & dataset after you ran the tools to download everything. They are organized in folders by `./data/id`. 
 
