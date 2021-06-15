@@ -5,12 +5,12 @@ set -x
 
 needs_patch=true 
 
-patch_file=test1.patch
+patch_file=test3.patch
 
-bug_id=1
+bug_id=3
 target_directory=../../../data
 repository=elki-project/elki
-commit=1997614e9a184946bdd66c955660a4e4bc160167
+commit=497fc7aef2b7f5cda0f6ef2ed620b4a937490b62
 
 remove_history=false
 

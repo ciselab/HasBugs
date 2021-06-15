@@ -5,9 +5,9 @@ set -x
 
 needs_patch=true 
 
-patch_file=test1.patch
+patch_file=test4.patch
 
-bug_id=1
+bug_id=4
 target_directory=../../../data
 repository=elki-project/elki
 commit=1997614e9a184946bdd66c955660a4e4bc160167

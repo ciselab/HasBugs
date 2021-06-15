@@ -1,0 +1,33 @@
+From 41252d3de4ac812f7eedc7eebe3e1a8ca351b549 Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Tue, 15 Jun 2021 08:27:45 +0200
+Subject: [PATCH] test4
+
+---
+ .../test/java/elki/clustering/kmeans/YinYangKMeansTest.java  | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/elki-clustering/src/test/java/elki/clustering/kmeans/YinYangKMeansTest.java b/elki-clustering/src/test/java/elki/clustering/kmeans/YinYangKMeansTest.java
+index ff73a36f8..f0c72e4ea 100644
+--- a/elki-clustering/src/test/java/elki/clustering/kmeans/YinYangKMeansTest.java
++++ b/elki-clustering/src/test/java/elki/clustering/kmeans/YinYangKMeansTest.java
+@@ -57,4 +57,16 @@ public class YinYangKMeansTest extends AbstractClusterAlgorithmTest {
+     assertFMeasure(db, result, 0.998005);
+     assertClusterSizes(result, new int[] { 199, 200, 200, 200, 201 });
+   }
++
++    // Tests Issue 87
++    @Test
++    public void testKMeansYinYangOne_SingleCluster_shouldPutAllInOneCluster() {
++        Database db = makeSimpleDatabase(UNITTEST + "different-densities-2d-no-noise.ascii", 1000);
++        Clustering<?> result = new ELKIBuilder<YinYangKMeans<DoubleVector>>(YinYangKMeans.class) //
++                .with(KMeans.K_ID, 1) //
++                .with(YinYangKMeans.Par.T_ID, 1) //
++                .with(KMeans.SEED_ID, 7) //
++                .build().autorun(db);
++        assertClusterSizes(result, new int[] { 1000 });
++    }
+ }
+-- 
+2.14.2.windows.3
+
