@@ -1,42 +1,42 @@
 {
-    "*ID":5,
-    "*RepositoryURL": "https:www.github.com/ciselab/rhodos",
-    "*Repository":"Ciselab/Rhodos",
-    "*Licence":"MIT",
-    "*FaultCommit":"xxx",
-    "*FixCommit":"yyy",
+    "id":5,
+    "repositoryurl": "https:www.github.com/ciselab/rhodos",
+    "repository":"Ciselab/Rhodos",
+    "licence":"MIT",
+    "faultcommit":"xxx",
+    "fixcommit":"yyy",
     
-    "JavaVersion":9,
-    "BuildFramework":"Maven",
-    "TestFrameworks" : ["JUnit"],
+    "javaversion":9,
+    "buildframework":"Maven",
+    "testframeworks" : ["JUnit"],
 
-    "TestPatch":true,
-    "Description": "Input Sanitazion missing - divides by zero",
-    "Categories" : ["Sanitazion", "DivideByZero"], 
+    "testpatch":true,
+    "description": "Input Sanitazion missing - divides by zero",
+    "categories" : ["Sanitazion", "DivideByZero"],
     
-    "RelatedIssues" : ["https:www.github.com/ciselab/rhodos/issues/1"],
-    "RelatedPRs" : ["https:www.github.com/ciselab/rhodos/issues/2"],
+    "relatedissues" : ["https:www.github.com/ciselab/rhodos/issues/1"],
+    "relatedprs" : ["https:www.github.com/ciselab/rhodos/issues/2"],
     
-    "FaultLocations" : [
+    "faultlocations" : [
     {
-        "*startline": 5,
-        "*endline": 15,
-        "*file" : "./project/.../program.java",
+        "startline": 5,
+        "endline": 15,
+        "file" : "./project/.../program.java",
         "class" : "fully.qualified.package.program",
         "method": "Main(String[])"
     },{
-        "*startline": 25,
-        "*endline": 35,
-        "*file" : "./project/.../program.java",
+        "startline": 25,
+        "endline": 35,
+        "file" : "./project/.../program.java",
         "class" : "fully.qualified.package.program",
         "method": "helper()"
     }
     ],
-    "FixLocations" : [
+    "fixlocations" : [
     {
-        "*startline": 5,
-        "*endline": 20,
-        "*file" : "./project/.../program.java",
+        "startline": 5,
+        "endline": 20,
+        "file" : "./project/.../program.java",
         "class" : "fully.qualified.package.program",
         "method": "Main(String[])"
     }
