@@ -17,7 +17,6 @@ def run(datapoint_path,outputdir):
     :param outputdir: Path where to put the resolved references
     :return: ---
     """
-    print("Hello World")
     checkFiles(datapoint_path,outputdir)
 
     file_loader = FileSystemLoader('templates')
@@ -53,9 +52,10 @@ def run(datapoint_path,outputdir):
     buggy_file.close()
 
     datapoint_copy = open(os.path.join(outputdir,"datapoint.json"),"w")
-    datapoint_content = json.dump(datapoint,datapoint_copy)
-    #datapoint_copy.write(datapoint_content)
+    json.dump(datapoint,datapoint_copy)
     datapoint_copy.close()
+
+    print("Successfully finished writing the templates - congratulations!")
 
 def checkFiles(datapoint,outputdir):
     """
