@@ -13,7 +13,7 @@ commit={{faultcommit | default("xxx")}}
 target_directory=../../../data
 # Whether or not to remove the History
 # If true, after moving to the specified commit the .git will be deleted to make the dataset smaller
-remove_history={{removegit || default(false)}}
+remove_history={{removegit | default(false)}}
 
 ###                              ###
 # From Here on, it's autopilot     #
