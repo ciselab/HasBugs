@@ -2,6 +2,7 @@
 
 > "Hic Rhodus, Hic Salva"
 > (Here is Rhodes, here you can jump)
+> 
 > --- Äsop
 
 Welcome to the Rhodos Benchmark. 
@@ -36,56 +37,59 @@ For every project, we provide
 - Iff the buggy version does not have a failing test, a git-patch to create a buggy-but-tested version
 - A datapoint for analysis (see below)
 
-A single datapoint can contain the following attributes (required attributes are marked with *): 
+A single datapoint can contain the following attributes (required attributes are marked with *, but these stars are not in the actual json!): 
 
 ```JSON
 {
-    "*ID":42,
-    "*RepositoryURL": "https:www.github.com/ciselab/rhodos",
-    "*Repository":"Ciselab/Rhodos",
-    "*Licence":"MIT",
-    "*FaultCommit":"xxx",
-    "*FixCommit":"yyy",
+    "*id":42,
+    "*repositoryurl": "https://github.com/ciselab/rhodos",
+    "*repository":"Ciselab/Rhodos",
+    "*licence":"MIT",
+    "*faultcommit":"xxx",
+    "*fixcommit":"yyy",
 
-    "JavaVersion":9,
-    "BuildFramework":"Maven",
-    "TestFrameworks" : ["JUnit"],
+    "javaversion":9,
+    "buildframework":"Maven",
+    "testframeworks" : ["JUnit"],
 
-    "TestPatch":true,
-    "Description": "Input Sanitazion missing - divides by zero",
-    "Categories" : ["Sanitazion", "DivideByZero"], 
+    "testpatch":true,
+    "description": "Input Sanitazion missing - divides by zero",
+    "categories" : ["Sanitazion", "DivideByZero"], 
 
-    "RelatedIssues" : ["https:www.github.com/ciselab/rhodos/issues/1"],
-    "RelatedPRs" : ["https:www.github.com/ciselab/rhodos/issues/2"],
+    "relatedissues" : ["https:www.github.com/ciselab/rhodos/issues/1"],
+    "relatedprs" : ["https:www.github.com/ciselab/rhodos/issues/2"],
 
-    "*FaultLocations" : [
+    "*faultlocations" : [
         {
             "*startline": 5,
             "*endline": 15,
             "*file" : "./project/.../program.java",
             "class" : "fully.qualified.package.program",
-            "method": "Main"
+            "method": "Main()"
         },{
             "*startline": 25,
             "*endline": 35,
             "*file" : "./project/.../program.java",
             "class" : "fully.qualified.package.program",
             "method": "helper"
-        },
+        }
     ],
-    "*FixLocations" : [
+    "*fixlocations" : [
         {
             "*startline": 5,
             "*endline": 20,
             "*file" : "./project/.../program.java",
             "class" : "fully.qualified.package.program",
-            "method": "Main"
+            "method": "Main()"
         }
     ]
 }
 ```
 
 For a few more sentences on the datapoint fields and the commits see [datapoint-notes](./template/datapoint-notes.md).
+
+You can either fill the things provided in [template](./template) or you fill the datapoint and then have a look at [the templater](./tools/templater).
+It does most of the template filling, it just doesn't do the patches.
 
 ## Layout 
 
@@ -100,4 +104,4 @@ For a few more sentences on the datapoint fields and the commits see [datapoint-
 - Junit Tests 
 - Projects run with a single `mvn test` or `gradle build` (low magic fantasy-setting)
 - buggy version newer than 2018
-- bug and fix aknowledged as such by the maintainer(s)
+- bug and fix aknowledged as such by the maintainer(s) through Github Issues / PRs 

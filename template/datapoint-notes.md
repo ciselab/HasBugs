@@ -57,7 +57,7 @@ For this, we provide a [stashed git patch](https://stackoverflow.com/questions/5
 See [git-helpers](./git-helpers.md) for more how the patches are created and applied.
 
 Elements deemed *important* are choosen carefully by the authors. 
-You can consider this a threat to validity, but if you want to pick a fight just call me bro I fuck you up big time. :rage: 
+You can consider this a threat to validity, but if you want to pick a fight just call me. :rage: 
 
 ## TODOS:
 
