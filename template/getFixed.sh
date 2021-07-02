@@ -19,6 +19,8 @@ remove_history=true
 # From Here on, it's autopilot     #
 ###                              ###
 
+origin="$PWD"
+
 echo "creating ${target_directory}/${bug_id}"
 mkdir "${target_directory}/"
 mkdir "${target_directory}/${bug_id}"
@@ -34,5 +36,9 @@ if [ "$remove_history" = true ];
 then rm -rf .git;
 else echo "Keeping Git History for ${repository}"; 
 fi
+
+# Put the Rhodos-Dockerfile in Place
+echo "moving the Rhodos Dockerfile to project repository"
+cp "${origin}/RHODOS_DOCKERFILE" .
 
 exit 0

@@ -3,6 +3,8 @@
 # Debug Info
 set -x 
 
+origin="$PWD"
+
 bug_id=1
 target_directory=../../../data
 repository=elki-project/elki
@@ -25,5 +27,9 @@ if [ "$remove_history" = true ];
 then rm -rf .git;
 else echo "Keeping Git History for ${repository}"; 
 fi
+
+# Put the Rhodos-Dockerfile in Place
+echo "moving the Rhodos Dockerfile to project repository"
+cp "${origin}/RHODOS_DOCKERFILE" .
 
 exit 0
