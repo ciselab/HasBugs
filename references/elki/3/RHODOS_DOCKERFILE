@@ -1,0 +1,8 @@
+FROM gradle:7.1-jdk11
+#Both J11 and J8 are working
+#FROM gradle:7.1-jdk8
+
+WORKDIR /build
+
+COPY . .
+RUN ["./gradlew","test"]
