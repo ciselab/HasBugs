@@ -16,7 +16,7 @@ Within the Dataset, we specialize on Machine-Learning Projects, as they have a s
 
 Instead of just providing the commits, we learned from some of the datasets out there, which we address in the following: 
 
-- A failing CI does not mean a bug - atleast not certainly from the code. Hence, our bug-points are aknowledged by the project-maintainers through PRs and Issues.
+- A failing CI does not mean a bug - atleast not certainly from the code. Hence, our bug-points are aknowledged by the project-maintainers through PRs and Issues. This also means that the *buggy version* of the datapoints usually compiles. 
 - Similarly, the Fix is what the maintainers consider fixed (even if that is removal of a feature).
 - For the test-cases we provide, we try to get feedback from the maintainers whether they can be considered an accurate test-case. We do so by PR to their project.  
 - As research by [Martin Monperrus](https://link.springer.com/article/10.1007/s10664-016-9470-4) showed, not all found patches in program repair actually help despite passing the test-suite. 
