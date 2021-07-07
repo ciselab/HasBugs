@@ -1,0 +1,30 @@
+{
+    "id":6,
+    "repositoryurl": "https://github.com/EvoSuite/evosuite",
+    "repository":"EvoSuite/evosuite",
+    "licence":"LGLP3",
+    "faultcommit":"a36ed52e65184c03857125e11d9b93dbd812f24f",
+    "fixcommit":"7ac2b86ef362ea7b3e964202622e3207a6b50fd6",
+    
+    "javaversion":8,
+    "buildframework":"Maven",
+    "testframeworks" : ["JUnit"],
+
+    "testpatch":false,
+    "description": "Downstream Error in Apache Commons Lang, fixed by checking for the known bug in a loop",
+    "categories" : ["Library Error", "Workaround"],
+    
+    "relatedissues" : ["https://github.com/EvoSuite/evosuite/issues/191"],
+    "relatedprs" : [],
+    
+    "faultlocations" : [],
+    "fixlocations" : [
+    {
+        "startline": 1258,
+        "endline": 1260,
+        "file" : "./client/src/main/java/org/evosuite/testcase/TestFactory.java",
+        "class" : " org.evosuite.testcase.TestFactory",
+        "method": "createObject(TestCase,Type,int,int,VariableReference,boolean,boolean,boolean)"
+    }
+    ]
+}

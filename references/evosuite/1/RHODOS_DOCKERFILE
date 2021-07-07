@@ -1,0 +1,6 @@
+FROM maven:3-openjdk-8-slim
+
+WORKDIR /build
+COPY . .
+
+RUN mvn -e -B package 
