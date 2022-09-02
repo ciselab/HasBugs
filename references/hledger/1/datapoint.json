@@ -10,9 +10,9 @@
     "buildframework": "stack",
     "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
 
-    "testpatch": "",
+    "testpatch": false,
     "description": "A combination of operating modes did not work because price information was copied where it should not have been.",
-    "categories": [""],
+    "categories": ["unit"],
     
     "relatedissues": ["https://github.com/simonmichael/hledger/issues/862"],
     "relatedprs": ["https://github.com/simonmichael/hledger/pull/874"],
