@@ -31,7 +31,12 @@ echo "What build framework is used for this project? "
 read build_framework
 
 echo "What testing frameworks are used for this project? (separate with comma's)"
-IFS="," read test_frameworks
+IFS="," read -r -a test_frameworks
+
+# Trim whitespace from list
+for ((i=0; i<"${#test_frameworks[@]}"; i++)); do
+	test_frameworks[$i]=$(echo "${test_frameworks[$i]}" | xargs)
+done
 
 # Ask for a dockerfile to reference if one is available for this project
 echo "Dockerfiles available:"
@@ -61,13 +66,15 @@ cd "$list_dir/$display_name"
 # Output these variables to a config file in the directory
 echo "Writing metadata.config file"
 cat <<EOF > metadata.config
-repository_id=$repository_id
-display_name=$display_name
-repository_name=$repository_name
-repository_url=git@github.com:$repository_name
-license=$license
-build_framework=$build_framework
-test_frameworks=$test_frameworks
+#!/bin/bash
+
+repository_id="$repository_id"
+display_name="$display_name"
+repository_name="$repository_name"
+repository_url="git@github.com:$repository_name"
+license="$license"
+build_framework="$build_framework"
+test_frameworks=($(printf "\"%s\" " ${test_frameworks[@]} | rev | cut -c2- | rev))
 EOF
 
 # Copy the Dockerfile to the directory if one is provided, or create an empty one

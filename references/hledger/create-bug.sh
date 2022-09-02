@@ -10,5 +10,5 @@ display_name=$(basename $repo_dir)
 # Move into repo directory for the relative link later
 cd $repo_dir
 
-# Call the get-repo.sh script from this location
-../../scripts/get-repo.sh "$display_name"
+# Call the create-bug.sh script from this location
+../../tools/create-bug.sh "$display_name"

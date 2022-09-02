@@ -54,7 +54,7 @@ fi
 # Create the target directory and move into it.
 echo "Creating ${target_dir}"
 mkdir -p "$(dirname $target_dir)"
-cd "${target_dir}"
+cd "$(dirname $target_dir)"
 
 
 # Clone the repository into this directory
@@ -65,6 +65,8 @@ else
 	echo "Already cloned repository"
 fi
 
+# Move into the target directory
+cd "$target_dir"
 
 # Set HEAD to the given commit if one is given
 if [[ "$target" == "buggy" ]]; then

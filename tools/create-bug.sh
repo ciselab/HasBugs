@@ -14,13 +14,17 @@ docker_dir="$script_dir/../docker"
 
 # The first argument is required to be the display_name of the project.
 display_name="$1"
-if [[ ! -z "$display_name" ]]; then
+if [ ! -z "$display_name" ] && [ -d "$list_dir/$display_name" ]; then
 	cd "$list_dir/$display_name"
 	. metadata.config
+elif [[ ! -d "$list_dir/$display_name" ]]; then
+	echo "Cannot find repository with name: $display_name"
+	exit 1
 else
 	echo "Missing argument: display name of the repository"
 	exit 1
 fi
+
 
 # This script expects to have the following variables made available from any metadata config:
 # repository_id
@@ -50,18 +54,44 @@ read fix_commit
 echo "Enter the commit at which the fix was tested."
 read test_commit
 
+echo "What version of GHC is used to compile this bug/fix/test?"
+read ghc_version
+
+echo "Describe the bug."
+read description
+
+echo "What categories does this bug belong to (separate with ',')?"
+IFS="," read -r -a categories
+
+# Trim whitespace from list
+for ((i=0; i<"${#categories[@]}"; i++)); do
+	categories[$i]=$(echo "${categories[$i]}" | xargs)
+done
+
 echo "Link the issue(s) that this fix was applied for (full URLs, separated with ',')."
-IFS="," read issues
+IFS="," read -r -a issues
+
+# Trim whitespace from list
+for ((i=0; i<"${#issues[@]}"; i++)); do
+	issues[$i]=$(echo "${issues[$i]}" | xargs)
+done
 
 echo "Link the pull request(s) that this fix was applied in (full URLs, separated with ',')."
-IFS="," read pull_requests
+IFS="," read -r -a prs
+
+# Trim whitespace from list
+for ((i=0; i<"${#prs[@]}"; i++)); do
+	prs[i]=$(echo "${prs[$i]}" | xargs)
+done
+
+
 
 
 ## Create the bug directory and output metadata and Dockerfile
 
 # Get and update the id
 bug_id=$(cat .bug-id)
-full_bug_if="$display_name-$bug_id"
+full_bug_id="$display_name-$bug_id"
 
 # If the directory already exists, make a report and exit
 if [[ -d "$bug_id" ]]; then
@@ -80,18 +110,24 @@ cd "$bug_id"
 # Output these variables to a config file in the directory
 echo "Writing metadata.config file"
 cat <<EOF > metadata.config
+#!/bin/bash
+
 # Repository 
 if [[ ! "\$1" == "norepo" ]]; then
-	$(cat ../metadata.config)
+$(cat ../metadata.config | xargs -L 1 echo -e "\t")
 fi
 
-full_bug_id=$full_bug_id
-bug_id=$bug_id
-fault_commit=$fault_commit
-fix_commit=$fix_commit
-test_commit=$test_commit
-issues=$issues
-pull_requests=$pull_requests
+# Bug
+full_bug_id="$full_bug_id"
+bug_id="$bug_id"
+fault_commit="$fault_commit"
+fix_commit="$fix_commit"
+test_commit="$test_commit"
+ghc_version="$ghc_version"
+description="$description"
+categories=($(printf "\"%s\" " "${categories[@]}" | rev | cut -c2- | rev))
+issues=($(printf "\"%s\" " "${issues[@]}" | rev | cut -c2- | rev))
+prs=($(printf "\"%s\" " "${prs[@]}" | rev | cut -c2- | rev))
 EOF
 
 # Copy the Dockerfile over
@@ -149,6 +185,55 @@ EOF
 chmod +x get-tested.sh
 
 
+
+# Write the datapoint.json file
+echo "Writing datapoint.json file"
+cat <<EOF > datapoint.json
+{
+    "id": "$full_bug_id",
+    "repositoryurl": "$repository_url",
+    "repository": "$display_name",
+    "licence": "$license",
+    "faultcommit": "$fault_commit",
+    "fixcommit": "$fix_commit",
+    
+    "ghcversion": "$ghc_version",
+    "buildframework": "$build_framework",
+    "testframeworks": [$(printf "\"%s\", " "${test_frameworks[@]}" | rev | cut -c3- | rev)],
+
+    "testpatch": "$test_patch",
+    "description": "$description",
+    "categories": [$(printf "\"%s\", " "${categories[@]}" | rev | cut -c3- | rev)],
+    
+    "relatedissues": [$(printf "\"%s\", " "${issues[@]}" | rev | cut -c3- | rev)],
+    "relatedprs": [$(printf "\"%s\", " "${prs[@]}" | rev | cut -c3- | rev)],
+    
+    "faultlocations" : [
+    {
+        "startline": 5,
+        "endline": 15,
+        "file" : "./project/.../Module.hs",
+        "module" : "Fully.Qualified.Module",
+        "function": "main"
+    },{
+        "startline": 25,
+        "endline": 35,
+        "file": "./project/.../Module.hs",
+        "module": "Fully.Qualified.Module",
+        "function": "helper"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 5,
+        "endline": 20,
+        "file": "./project/.../Module.hs",
+        "class": "Fully.Qualified.Module",
+        "function": "main"
+    }
+    ]
+}
+EOF
 
 
 

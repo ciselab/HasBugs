@@ -11,4 +11,4 @@ display_name=$(basename $repo_dir)
 cd $repo_dir
 
 # Call the get-repo.sh script from this location
-../../scripts/get-repo.sh "$display_name"
+../../tools/get-repo.sh "$display_name"

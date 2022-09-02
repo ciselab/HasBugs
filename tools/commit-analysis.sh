@@ -18,7 +18,7 @@ display_name="$1"
 cd "$data_dir/$display_name"
 git log > rhodos.gitlog
 
-echo "fin"
+echo ""
 
 # Count occurrences of issue-like text
 echo "Counting $(grep -Eo "#" rhodos.gitlog | wc -l) #'s"
