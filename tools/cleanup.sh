@@ -8,5 +8,5 @@ script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 data_dir="$script_dir/../data"
 
 # Remove all contents of the data directory
-rm -rf "$data_dir/*"
+rm -vrf "$data_dir/*"
 

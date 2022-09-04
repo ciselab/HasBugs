@@ -13,6 +13,9 @@ list_dir="$script_dir/../references"
 # Set the directory in which data is stored
 data_dir="$script_dir/../data"
 
+# Set the patch file name
+patch_file="RHODOS_TEST.patch"
+
 
 # First argument to this script should be the display name of the project repository (as named in the directory structure as well).
 display_name="$1"
@@ -58,7 +61,8 @@ cd "$(dirname $target_dir)"
 
 
 # Clone the repository into this directory
-if [[ ! -d "$target_dir" ]]; then
+if [[ ! -d "$target_dir/.git" ]]; then
+	rm -rf "$target_dir"
 	echo "Cloning $repository_url"
 	git clone "$repository_url" "$target_dir"
 else
@@ -66,25 +70,41 @@ else
 fi
 
 # Move into the target directory
+echo "Going into '$target_dir'"
 cd "$target_dir"
+
+
+# Ensure we're not still in the Rhodos repository
+if [[ ! -z "$(git remote show origin | grep Rhodos)" ]]; then
+	echo "Still in Rhodos repository! Cannot continue git operations..."
+	exit 1
+fi
+
+# Print the fix and fault commit
+echo "Using faulty commit: $fault_commit"
+echo "Using fixed commit: $fixed_commit"
 
 # Set HEAD to the given commit if one is given
 if [[ "$target" == "buggy" ]]; then
 	echo "Resetting to faulty commit: ${fault_commit}"
-	git reset --hard "${fault_commit}"
+	git reset --hard
+	git checkout -f "$fault_commit"
 elif [[ "$target" == "fixed" ]]; then
 	echo "Resetting to fixed commit: ${fixed_commit}"
-	git reset --hard "${fixed_commmit}"
-elif [[ "$target" == "tested" && ! -z "$(cat $patch_file)" ]]; then
+	git reset --hard
+	git checkout -f "$fixed_commit"
+elif [[ "$target" == "tested" && "$patch_test" ]]; then
 	echo "Resetting to faulty commit and patching with test"
-	git reset --hard "${fault_commit}"
+	git reset --hard
+	git checkout -f "$fault_commit"
 
 	echo "Patching with patch file: ${patch_file}"
 	cp "${origin}/${patch_file}" ./
 	git am "${patch_file}"
 elif [[ "$target" == "tested" ]]; then
 	echo "Resetting to fixed commit (with test?)"
-	git reset --hard "${fixed_commit}"
+	git reset --hard
+	git checkout -f "$fixed_commit"
 else
 	echo "Not resetting to any commit, using HEAD as it is"
 fi

@@ -51,8 +51,8 @@ read fault_commit
 echo "Enter the commit at which the fix was implemented." 
 read fix_commit
 
-echo "Enter the commit at which the fix was tested."
-read test_commit
+echo "Will you use a test patch? (true/false)"
+read patch_test
 
 echo "What version of GHC is used to compile this bug/fix/test?"
 read ghc_version
@@ -95,7 +95,7 @@ full_bug_id="$display_name-$bug_id"
 
 # If the directory already exists, make a report and exit
 if [[ -d "$bug_id" ]]; then
-	echo "ERROR: Directory for bug $repository_id-$bug_id already exists!"
+	echo "ERROR: Directory for bug $full_bug_id already exists!"
 	exit 1
 fi
 
@@ -103,7 +103,7 @@ echo "$((bug_id+1))" > .bug-id
 
 
 # Make the directory
-echo -e "\nMaking the bug directory for bug $repository_id-$bug_id."
+echo -e "\nMaking the bug directory for bug $full_bug_id."
 mkdir -p "$bug_id"
 cd "$bug_id"
 
@@ -122,7 +122,7 @@ full_bug_id="$full_bug_id"
 bug_id="$bug_id"
 fault_commit="$fault_commit"
 fix_commit="$fix_commit"
-test_commit="$test_commit"
+patch_test="$patch_test"
 ghc_version="$ghc_version"
 description="$description"
 categories=($(printf "\"%s\" " "${categories[@]}" | rev | cut -c2- | rev))
@@ -183,6 +183,17 @@ $(cat .temp.sh)
 $(realpath --relative-to="$PWD" "$script_dir")/get-tested.sh "\$display_name" "\$bug_id"
 EOF
 chmod +x get-tested.sh
+
+
+# Write the get-tested.sh script link
+echo "Writing run-tested.sh script"
+cat <<EOF > run-tested.sh
+$(cat .temp.sh)
+
+# Call run-tested.sh script
+$(realpath --relative-to="$PWD" "$script_dir")/run-tested.sh "\$display_name" "\$bug_id"
+EOF
+chmod +x run-tested.sh
 
 
 
