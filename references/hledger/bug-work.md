@@ -1,11 +1,13 @@
-### Bug 2:
-Fix commit: 
-Fault commit: 
+### Bug 3:
+
+
+Fix commit:
+Fault commit:
+
+PRS:
 
 Issues:
 
-PRs:
-https://github.com/simonmichael/hledger/pull/1906
 
 
 ### Bug -1:

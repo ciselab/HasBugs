@@ -6,7 +6,7 @@
     "faultcommit": "ef5e7511c2a07f68a0c1d24af683ae36e701fd76",
     "fixcommit": "8c79d6529d748c18d957cd732e1d1e9e07d661fc",
     
-    "ghcversion": "9.0.2",
+    "ghcversion": "8.4.3",
     "buildframework": "stack",
     "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
 

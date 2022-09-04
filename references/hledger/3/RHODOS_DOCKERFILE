@@ -1,0 +1,9 @@
+FROM haskell:9.0.2
+
+WORKDIR /build
+COPY . .
+
+RUN apt-get update && apt-get install -y shelltestrunner python
+
+RUN make functest
+

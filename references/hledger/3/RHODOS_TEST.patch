@@ -1,0 +1,37 @@
+From a65e64115a1e19033c3d51bb1a89081e6a03d3aa Mon Sep 17 00:00:00 2001
+From: Stephen Morgan <morgan.stephen99@gmail.com>
+Date: Wed, 9 Mar 2022 12:13:59 +1100
+Subject: [PATCH] fix: alias: Allow escaped characters in regular expression
+ aliases. (#982)
+
+---
+ hledger-lib/Hledger/Read/Common.hs | 11 ++++++-----
+ hledger/test/account-aliases.test  | 15 +++++++++++++++
+ 2 files changed, 21 insertions(+), 5 deletions(-)
+
+diff --git a/hledger/test/account-aliases.test b/hledger/test/account-aliases.test
+index 2ad166270..09cd2e9b7 100644
+--- a/hledger/test/account-aliases.test
++++ b/hledger/test/account-aliases.test
+@@ -252,3 +252,18 @@ $ hledger -f- --alias old="new  USD" print | hledger -f- print
+     other
+ 
+ >=0
++
++# 18. Make sure you can match forward slashes in regexps by escaping them. (#982)
++<
++alias /\// = :
++
++2021-01-01
++  hi/there    1
++  b
++
++$ hledger -f- print
++2021-01-01
++    hi:there               1
++    b
++
++>=0
+-- 
+2.25.1
+

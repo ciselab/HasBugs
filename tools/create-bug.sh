@@ -122,7 +122,7 @@ full_bug_id="$full_bug_id"
 bug_id="$bug_id"
 fault_commit="$fault_commit"
 fix_commit="$fix_commit"
-patch_test="$patch_test"
+patch_test=$patch_test
 ghc_version="$ghc_version"
 description="$description"
 categories=($(printf "\"%s\" " "${categories[@]}" | rev | cut -c2- | rev))
@@ -196,6 +196,9 @@ EOF
 chmod +x run-tested.sh
 
 
+rm .temp.sh
+
+
 
 # Write the datapoint.json file
 echo "Writing datapoint.json file"
@@ -204,7 +207,7 @@ cat <<EOF > datapoint.json
     "id": "$full_bug_id",
     "repositoryurl": "$repository_url",
     "repository": "$display_name",
-    "licence": "$license",
+    "license": "$license",
     "faultcommit": "$fault_commit",
     "fixcommit": "$fix_commit",
     
@@ -212,7 +215,7 @@ cat <<EOF > datapoint.json
     "buildframework": "$build_framework",
     "testframeworks": [$(printf "\"%s\", " "${test_frameworks[@]}" | rev | cut -c3- | rev)],
 
-    "testpatch": "$test_patch",
+    "testpatch": $patch_test,
     "description": "$description",
     "categories": [$(printf "\"%s\", " "${categories[@]}" | rev | cut -c3- | rev)],
     
@@ -239,7 +242,7 @@ cat <<EOF > datapoint.json
         "startline": 5,
         "endline": 20,
         "file": "./project/.../Module.hs",
-        "class": "Fully.Qualified.Module",
+        "module": "Fully.Qualified.Module",
         "function": "main"
     }
     ]

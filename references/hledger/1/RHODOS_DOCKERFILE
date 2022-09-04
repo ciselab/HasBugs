@@ -1,7 +1,8 @@
-FROM haskell:9.2.4
+FROM haskell:8.4.3
 
 WORKDIR /build
 COPY . .
 
-RUN stack test
+RUN apt update; apt install -y python
 
+RUN stack setup

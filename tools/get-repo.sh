@@ -82,7 +82,7 @@ fi
 
 # Print the fix and fault commit
 echo "Using faulty commit: $fault_commit"
-echo "Using fixed commit: $fixed_commit"
+echo "Using fixed commit: $fix_commit"
 
 # Set HEAD to the given commit if one is given
 if [[ "$target" == "buggy" ]]; then
@@ -90,9 +90,9 @@ if [[ "$target" == "buggy" ]]; then
 	git reset --hard
 	git checkout -f "$fault_commit"
 elif [[ "$target" == "fixed" ]]; then
-	echo "Resetting to fixed commit: ${fixed_commit}"
+	echo "Resetting to fixed commit: ${fix_commit}"
 	git reset --hard
-	git checkout -f "$fixed_commit"
+	git checkout -f "$fix_commit"
 elif [[ "$target" == "tested" && "$patch_test" ]]; then
 	echo "Resetting to faulty commit and patching with test"
 	git reset --hard
@@ -104,7 +104,7 @@ elif [[ "$target" == "tested" && "$patch_test" ]]; then
 elif [[ "$target" == "tested" ]]; then
 	echo "Resetting to fixed commit (with test?)"
 	git reset --hard
-	git checkout -f "$fixed_commit"
+	git checkout -f "$fix_commit"
 else
 	echo "Not resetting to any commit, using HEAD as it is"
 fi

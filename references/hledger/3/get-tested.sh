@@ -10,3 +10,6 @@ display_name=$(basename $(dirname $bug_dir))
 
 # Set working directory to relatively link to the scripts
 cd $bug_dir
+
+# Call get-tested.sh script
+../../../tools/get-tested.sh "$display_name" "$bug_id"

@@ -21,7 +21,7 @@ fi
 
 # Whether or not to remove the History
 # If true, after moving to the specified commit the .git will be deleted to make the dataset smallet
-export remove_history=true
+export remove_history=false
 
 "$script_dir/get-repo.sh" "$1" "$2" "fixed"
 

@@ -11,5 +11,5 @@ display_name=$(basename $(dirname $bug_dir))
 # Set working directory to relatively link to the scripts
 cd $bug_dir
 
-# Call run-tested.sh script
-../../../tools/run-tested.sh "$display_name" "$bug_id"
+# Call get-buggy.sh script
+../../../tools/get-buggy.sh "$display_name" "$bug_id"

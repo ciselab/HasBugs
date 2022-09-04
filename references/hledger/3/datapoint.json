@@ -1,0 +1,38 @@
+{
+    "id": "hledger-3",
+    "repositoryurl": "git@github.com:simonmichael/hledger",
+    "repository": "hledger",
+    "license": "GPL-3.0",
+    "faultcommit": "852ba7b10000077c6d77eda50bf76ea1019f0368",
+    "fixcommit": "a65e64115a1e19033c3d51bb1a89081e6a03d3aa",
+    
+    "ghcversion": "9.0.2",
+    "buildframework": "stack",
+    "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
+
+    "testpatch": true,
+    "description": "Incorrect parsing for alias regexes, solved by adding the right 'between' and adding a line for allowing any character to be doubly escaped.",
+    "categories": ["unit-test", "parser"],
+    
+    "relatedissues": ["https://github.com/simonmichael/hledger/issues/982"],
+    "relatedprs": ["https://github.com/simonmichael/hledger/pull/1832"],
+    
+    "faultlocations" : [
+    {
+        "startline": 1518,
+        "endline": 1522,
+        "file" : "hledger-lib/Hledger/Read/Common.hs",
+        "module" : "Hledger.Read.Common",
+        "function": "regexaliasp"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 1518,
+        "endline": 1523,
+        "file": "hledger-lib/Hledger/Read/Common.hs",
+        "module": "Hledger.Read.Common",
+        "function": "regexaliasp"
+    }
+    ]
+}

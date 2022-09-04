@@ -10,7 +10,7 @@
     "buildframework": "stack",
     "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
 
-    "testpatch": "",
+    "testpatch": true,
     "description": "Division by 0 because the first non-empty number in a list was used, but not checked to be 0 by chance.",
     "categories": ["unit", "div-by-0"],
     
