@@ -1,0 +1,42 @@
+From 9d5397deb6d5d6e449221d35286f6e80f750cf55 Mon Sep 17 00:00:00 2001
+From: Stephen Morgan <morgan.stephen99@gmail.com>
+Date: Wed, 22 Sep 2021 11:58:27 +1000
+Subject: [PATCH] fix: print: auto: The print command should always display
+ inferred amounts for --auto generated postings. (#1276)
+
+---
+ hledger/Hledger/Cli/Commands/Print.hs | 28 ++++++++++++++++-----------
+ hledger/test/print/explicit.test      | 20 +++++++++++++++++++
+ 2 files changed, 37 insertions(+), 11 deletions(-)
+
+diff --git a/hledger/test/print/explicit.test b/hledger/test/print/explicit.test
+index 1c1fdd82e..4fd4b836b 100644
+--- a/hledger/test/print/explicit.test
++++ b/hledger/test/print/explicit.test
+@@ -112,3 +112,23 @@ hledger -f - print --explicit
+ 
+ >>>2
+ >>>=0
++
++# 9. Auto postings are always explicit
++hledger -f - print --auto
++<<<
++= a
++    c  *-0.453
++    d
++
++2021-09-01
++    a    1000 EUR
++    b
++>>>
++2021-09-01  ; modified:
++    a        1000 EUR
++    c        -453 EUR  ; generated-posting: = a
++    d         453 EUR  ; generated-posting: = a
++    b
++
++>>>2
++>>>=0
+-- 
+2.25.1
+

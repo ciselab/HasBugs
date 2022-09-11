@@ -1,0 +1,38 @@
+{
+    "id": "hledger-4",
+    "repositoryurl": "git@github.com:simonmichael/hledger",
+    "repository": "hledger",
+    "license": "GPL-3.0",
+    "faultcommit": "4006ab6d2d5623fbba9a64ae70722ac1b94da3ad",
+    "fixcommit": "9d5397deb6d5d6e449221d35286f6e80f750cf55",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
+
+    "testpatch": true,
+    "description": "Auto-generated postings without explicit amount needed to be displayed with one. The fix is to generate an amount for auto-postings without one.",
+    "categories": ["unit-test"],
+    
+    "relatedissues": ["https://github.com/simonmichael/hledger/issues/1276"],
+    "relatedprs": ["https://github.com/simonmichael/hledger/pull/1714"],
+    
+    "faultlocations" : [
+    {
+        "startline": 92,
+        "endline": 93,
+        "file" : "hledger/Hledger/Cli/Commands/Print.hs",
+        "module" : "Hledger.Cli.Commands.Print",
+        "function": "entriesReportAsText"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 92,
+        "endline": 99,
+        "file": "hledger/Hledger/Cli/Commands/Print.hs",
+        "module": "Hledger.Cli.Commands.Print",
+        "function": "entriesReportAsText"
+    }
+    ]
+}

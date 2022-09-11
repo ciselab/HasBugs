@@ -3,7 +3,7 @@ FROM haskell:9.2.2
 WORKDIR /build
 COPY . .
 
-RUN apt update; apt install -y shelltestrunner python
+RUN apt update && apt install -y shelltestrunner python
 
 RUN stack setup
 RUN make functest

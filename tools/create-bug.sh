@@ -114,7 +114,7 @@ cat <<EOF > metadata.config
 
 # Repository 
 if [[ ! "\$1" == "norepo" ]]; then
-$(cat ../metadata.config | xargs -L 1 echo -e "\t")
+$(cat ../metadata.config)
 fi
 
 # Bug
