@@ -12,7 +12,7 @@
 
     "testpatch": true,
     "description": "Auto-generated postings without explicit amount needed to be displayed with one. The fix is to generate an amount for auto-postings without one.",
-    "categories": ["unit-test"],
+    "categories": ["integration-test"],
     
     "relatedissues": ["https://github.com/simonmichael/hledger/issues/1276"],
     "relatedprs": ["https://github.com/simonmichael/hledger/pull/1714"],

@@ -1,9 +1,10 @@
-FROM haskell:9.0.2
+FROM haskell:8.10.7
 
 WORKDIR /build
 COPY . .
 
-RUN apt-get update && apt-get install -y shelltestrunner python
+RUN apt update && apt install -y shelltestrunner python
 
+RUN stack setup
 RUN make functest
 

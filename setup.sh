@@ -17,4 +17,5 @@ alias get-tested="$script_dir/get-tested.sh"
 alias get-repo="$script_dir/get-repo.sh"
 alias get-bug-id="$script_dir/get-bug-id.sh"
 alias get-repo-id="$script_dir/get-repo-id.sh"
+alias run-tested="$script_dir/run-tested.sh"
 
