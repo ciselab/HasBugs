@@ -1,0 +1,164 @@
+From 0f6cd41d51e1dd81ddeb117ab949ceb1f38e68cf Mon Sep 17 00:00:00 2001
+From: Oliver Madine <30090176+OliverMadine@users.noreply.github.com>
+Date: Thu, 7 Jul 2022 12:34:18 +0100
+Subject: [PATCH] Renaming of indirect references (RecordFieldPuns) (#3013)
+
+* test: add tests for record puns
+
+* feat: rename indirect references
+refactor: remove "safe" from function names
+
+* test: ignore record field tests for ghc92 (#2915)
+
+* test: ignore record field tests for ghc90 (#2915)
+
+* fix: update record field test ignore message
+
+* expand comment about indirect reference renaming
+
+* fix: find all punned references
+
+* test: ignore record field pun test for ghc > 9
+
+* docs: mention test in indirect pun explaination
+
+* link issue for ignored record field rename tests
+
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+---
+ .../src/Ide/Plugin/Rename.hs                  | 80 +++++++++++--------
+ plugins/hls-rename-plugin/test/Main.hs        | 13 ++-
+ .../test/testdata/FieldPuns.expected.hs       |  8 ++
+ .../test/testdata/FieldPuns.hs                |  8 ++
+ .../test/testdata/IndirectPuns.expected.hs    |  8 ++
+ .../test/testdata/IndirectPuns.hs             |  8 ++
+ .../hls-rename-plugin/test/testdata/hie.yaml  |  2 +
+ 7 files changed, 92 insertions(+), 35 deletions(-)
+ create mode 100644 plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs
+ create mode 100644 plugins/hls-rename-plugin/test/testdata/FieldPuns.hs
+ create mode 100644 plugins/hls-rename-plugin/test/testdata/IndirectPuns.expected.hs
+ create mode 100644 plugins/hls-rename-plugin/test/testdata/IndirectPuns.hs
+
+diff --git a/plugins/hls-rename-plugin/test/Main.hs b/plugins/hls-rename-plugin/test/Main.hs
+index 66bcea62..21151dec 100644
+--- a/plugins/hls-rename-plugin/test/Main.hs
++++ b/plugins/hls-rename-plugin/test/Main.hs
+@@ -15,12 +15,19 @@ main = defaultTestRunner tests
+ renamePlugin :: PluginDescriptor IdeState
+ renamePlugin = Rename.descriptor "rename"
+ 
++-- See https://github.com/wz1000/HieDb/issues/45
++recordConstructorIssue :: String
++recordConstructorIssue = "HIE references for record fields incorrect with GHC versions >= 9"
++
+ tests :: TestTree
+ tests = testGroup "Rename"
+     [ goldenWithRename "Data constructor" "DataConstructor" $ \doc ->
+         rename doc (Position 0 15) "Op"
+     , goldenWithRename "Exported function" "ExportedFunction" $ \doc ->
+         rename doc (Position 2 1) "quux"
++    , ignoreForGhcVersions [GHC90, GHC92] recordConstructorIssue $
++      goldenWithRename "Field Puns" "FieldPuns" $ \doc ->
++        rename doc (Position 7 13) "bleh"
+     , goldenWithRename "Function argument" "FunctionArgument" $ \doc ->
+         rename doc (Position 3 4) "y"
+     , goldenWithRename "Function name" "FunctionName" $ \doc ->
+@@ -33,6 +40,9 @@ tests = testGroup "Rename"
+         rename doc (Position 3 8) "baz"
+     , goldenWithRename "Import hiding" "ImportHiding" $ \doc ->
+         rename doc (Position 0 22) "hiddenFoo"
++    , ignoreForGhcVersions [GHC90, GHC92] recordConstructorIssue $
++      goldenWithRename "Indirect Puns" "IndirectPuns" $ \doc ->
++        rename doc (Position 4 23) "blah"
+     , goldenWithRename "Let expression" "LetExpression" $ \doc ->
+         rename doc (Position 5 11) "foobar"
+     , goldenWithRename "Qualified as" "QualifiedAs" $ \doc ->
+@@ -43,7 +53,8 @@ tests = testGroup "Rename"
+         rename doc (Position 3 12) "baz"
+     , goldenWithRename "Realigns do block indentation" "RealignDo" $ \doc ->
+         rename doc (Position 0 2) "fooBarQuux"
+-    , goldenWithRename "Record field" "RecordField" $ \doc ->
++    , ignoreForGhcVersions [GHC90, GHC92] recordConstructorIssue $
++      goldenWithRename "Record field" "RecordField" $ \doc ->
+         rename doc (Position 6 9) "number"
+     , goldenWithRename "Shadowed name" "ShadowedName" $ \doc ->
+         rename doc (Position 1 1) "baz"
+diff --git a/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs b/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs
+new file mode 100644
+index 00000000..f6618927
+--- /dev/null
++++ b/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs
+@@ -0,0 +1,8 @@
++{-# LANGUAGE NamedFieldPuns #-}
++
++module FieldPun () where
++
++newtype Foo = Foo { bleh :: Int }
++
++unFoo :: Foo -> Int
++unFoo Foo{bleh} = bleh
+diff --git a/plugins/hls-rename-plugin/test/testdata/FieldPuns.hs b/plugins/hls-rename-plugin/test/testdata/FieldPuns.hs
+new file mode 100644
+index 00000000..2cd53d00
+--- /dev/null
++++ b/plugins/hls-rename-plugin/test/testdata/FieldPuns.hs
+@@ -0,0 +1,8 @@
++{-# LANGUAGE NamedFieldPuns #-}
++
++module FieldPun () where
++
++newtype Foo = Foo { field :: Int }
++
++unFoo :: Foo -> Int
++unFoo Foo{field} = field
+diff --git a/plugins/hls-rename-plugin/test/testdata/IndirectPuns.expected.hs b/plugins/hls-rename-plugin/test/testdata/IndirectPuns.expected.hs
+new file mode 100644
+index 00000000..cf181c72
+--- /dev/null
++++ b/plugins/hls-rename-plugin/test/testdata/IndirectPuns.expected.hs
+@@ -0,0 +1,8 @@
++{-# LANGUAGE NamedFieldPuns #-}
++
++module IndirectPuns () where
++
++newtype Foo = Foo { blah :: Int }
++
++unFoo :: Foo -> Int
++unFoo Foo{blah} = blah
+diff --git a/plugins/hls-rename-plugin/test/testdata/IndirectPuns.hs b/plugins/hls-rename-plugin/test/testdata/IndirectPuns.hs
+new file mode 100644
+index 00000000..c823126a
+--- /dev/null
++++ b/plugins/hls-rename-plugin/test/testdata/IndirectPuns.hs
+@@ -0,0 +1,8 @@
++{-# LANGUAGE NamedFieldPuns #-}
++
++module IndirectPuns () where
++
++newtype Foo = Foo { field :: Int }
++
++unFoo :: Foo -> Int
++unFoo Foo{field} = field
+diff --git a/plugins/hls-rename-plugin/test/testdata/hie.yaml b/plugins/hls-rename-plugin/test/testdata/hie.yaml
+index 4c184b3c..892a7d67 100644
+--- a/plugins/hls-rename-plugin/test/testdata/hie.yaml
++++ b/plugins/hls-rename-plugin/test/testdata/hie.yaml
+@@ -3,6 +3,7 @@ cradle:
+     arguments:
+       - "DataConstructor"
+       - "ExportedFunction"
++      - "FieldPuns"
+       - "Foo"
+       - "FunctionArgument"
+       - "FunctionName"
+@@ -10,6 +11,7 @@ cradle:
+       - "HiddenFunction"
+       - "ImportHiding"
+       - "ImportedFunction"
++      - "IndirectPuns"
+       - "LetExpression"
+       - "QualifiedAs"
+       - "QualifiedFunction"
+-- 
+2.25.1
+
