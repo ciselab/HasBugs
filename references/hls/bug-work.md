@@ -12,8 +12,8 @@ https://github.com/haskell/haskell-language-server/issues/2970
 
 Fix:
 plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs
-From: 68-77, 96-96
-To: 67-88, 107-107, 249-253
+From: 69-77, 96-96
+To: 68-88, 107-107, 249-253
 
 Test:
 plugins/hls-rename-plugin/test/Main.hs
@@ -28,7 +28,7 @@ Command: `stack test plugins/hls-rename-plugin`
 Integration test because it runs the entire language server analysis?
 But unit test in what it attempts to assert?
 
-GHC: 8.10.7
+GHC: 9.2.3
 
 Categories:
 integration-test
