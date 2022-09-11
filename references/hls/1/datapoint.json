@@ -12,33 +12,45 @@
 
     "testpatch": true,
     "description": "When records are punned, there is a reference from pun to field declaration and from pun-name use to pun-declaration, but no transitive one. Meaning refactoring did not propagate to the latter. Solution is a second pass to find indirect pun references and rename those as well.",
-    "categories": ["integration"],
+    "categories": ["integration-test"],
     
     "relatedissues": ["https://github.com/haskell/haskell-language-server/issues/2970"],
     "relatedprs": ["https://github.com/haskell/haskell-language-server/pull/3013"],
     
     "faultlocations" : [
     {
-        "startline": 5,
-        "endline": 15,
-        "file" : "./project/.../Module.hs",
-        "module" : "Fully.Qualified.Module",
-        "function": "main"
+        "startline": 69,
+        "endline": 77,
+        "file" : "plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs",
+        "module" : "Ide.Plugin.Rename",
+        "function": "renameProvider"
     },{
-        "startline": 25,
-        "endline": 35,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "helper"
+        "startline": 96,
+        "endline": 96,
+        "file" : "plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs",
+        "module" : "Ide.Plugin.Rename",
+        "function": "failWhenImportOrExport"
     }
     ],
     "fixlocations" : [
     {
-        "startline": 5,
-        "endline": 20,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "main"
+        "startline": 68,
+        "endline": 88,
+        "file" : "plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs",
+        "module" : "Ide.Plugin.Rename",
+        "function": "renameProvider"
+    },{
+        "startline": 107,
+        "endline": 107,
+        "file" : "plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs",
+        "module" : "Ide.Plugin.Rename",
+        "function": "failWhenImportOrExport"
+    },{
+        "startline": 249,
+        "endline": 253,
+        "file" : "plugins/hls-rename-plugin/src/Ide/Plugin/Rename.hs",
+        "module" : "Ide.Plugin.Rename",
+        "function": "locToFilePos"
     }
     ]
 }

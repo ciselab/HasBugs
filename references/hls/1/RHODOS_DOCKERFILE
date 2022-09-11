@@ -1,8 +1,8 @@
-FROM haskell:8.10.7
+FROM haskell:8.8.4
 
 WORKDIR /build
 COPY . .
 
-RUN stack setup
-RUN stack test plugins/hls-rename-plugin
+RUN stack --stack-yaml=stack-lts16.yaml setup
+RUN stack --stack-yaml=stack-lts16.yaml test plugins/hls-rename-plugin
 
