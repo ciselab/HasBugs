@@ -1,6 +1,6 @@
 {
     "id": "shellcheck-1",
-    "repositoryurl": "git@github.com:koalaman/shellcheck/",
+    "repositoryurl": "git@github.com:koalaman/shellcheck",
     "repository": "shellcheck",
     "license": "GPL3",
     "faultcommit": "9008a6833bb5996f248dad0bde3c3e05ec22e65d",
