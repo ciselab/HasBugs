@@ -1,0 +1,52 @@
+From c3c73cf30bf8b59182e6df674e3f804b55b062ea Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Attila=20G=C3=A1sp=C3=A1r?=
+ <58485900+gasparattila@users.noreply.github.com>
+Date: Tue, 28 Jun 2022 15:44:42 +0200
+Subject: [PATCH] Add associated type families to local completions (#2987)
+
+Co-authored-by: Lei Zhu <julytreee@gmail.com>
+---
+ ghcide/src/Development/IDE/Plugin/Completions/Logic.hs |  6 ++++--
+ test/functional/Completion.hs                          | 10 ++++++++++
+ test/testdata/completion/AssociatedTypeFamily.hs       |  8 ++++++++
+ 3 files changed, 22 insertions(+), 2 deletions(-)
+ create mode 100644 test/testdata/completion/AssociatedTypeFamily.hs
+
+diff --git a/test/functional/Completion.hs b/test/functional/Completion.hs
+index 76a661bd..820f25ce 100644
+--- a/test/functional/Completion.hs
++++ b/test/functional/Completion.hs
+@@ -147,6 +147,16 @@ tests = testGroup "completions" [
+              item ^. label @?= "liftA"
+              item ^. kind @?= Just CiFunction
+              item ^. detail @?= Just "Control.Applicative"
++
++     , testCase "completes locally defined associated type family" $ runSession hlsCommand fullCaps "test/testdata/completion" $ do
++         doc <- openDoc "AssociatedTypeFamily.hs" "haskell"
++
++         compls <- getCompletions doc (Position 5 20)
++         item <- getCompletionByLabel "Fam" compls
++         liftIO $ do
++             item ^. label @?= "Fam"
++             item ^. kind @?= Just CiStruct
++
+      , contextTests
+      , snippetTests
+     ]
+diff --git a/test/testdata/completion/AssociatedTypeFamily.hs b/test/testdata/completion/AssociatedTypeFamily.hs
+new file mode 100644
+index 00000000..f50c1e20
+--- /dev/null
++++ b/test/testdata/completion/AssociatedTypeFamily.hs
+@@ -0,0 +1,8 @@
++{-# LANGUAGE TypeFamilies #-}
++module AssociatedTypeFamily () where
++
++class C a where
++    type Fam a
++
++x :: C a => a -> Fam a
++x = undefined
+-- 
+2.25.1
+

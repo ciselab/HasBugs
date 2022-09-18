@@ -1,6 +1,14 @@
 ### Bug 1:
 When records are punned, there is a reference from pun to field declaration and from pun-name use to pun-declaration, but no transitive one. Meaning refactoring did not propagate to the latter. Solution is a second pass to find indirect pun references and rename those as well.
 
+```haskell
+data Rec = Rec { field :: Int }
+
+usage :: Rec -> Int
+usage Rec{field} = field
+
+```
+
 Fix commit: 0f6cd41d51e1dd81ddeb117ab949ceb1f38e68cf
 Fault commit: ffefe761c8210c6b4a0c5092935f34767a3cd827
 
