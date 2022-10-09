@@ -3,10 +3,6 @@ FROM haskell:8.8.4
 WORKDIR /build
 COPY . .
 
-RUN cabal update
-RUN cabal install --only-dependencies 
-RUN cabal configure --enable-tests
-RUN cabal build
-RUN cabal test
-
+RUN stack setup
+RUN stack test
 

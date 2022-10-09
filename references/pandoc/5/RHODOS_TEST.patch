@@ -1,0 +1,95 @@
+From 09ea10e2b1d8c746422e1a05562b37db4c71be55 Mon Sep 17 00:00:00 2001
+From: Michael Hoffmann <brennan.brisad@gmail.com>
+Date: Wed, 8 Jul 2020 23:37:30 +0200
+Subject: [PATCH] Escape starting periods in ms writer code blocks
+
+If a line of ms code block output starts with a period (.), it should
+be prepended by '\&' so that it is not interpreted as a roff command.
+
+Fixes #6505
+---
+ pandoc.cabal                  |  1 +
+ src/Text/Pandoc/Writers/Ms.hs |  4 +++-
+ test/Tests/Writers/Ms.hs      | 37 +++++++++++++++++++++++++++++++++++
+ test/test-pandoc.hs           |  2 ++
+ 4 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 test/Tests/Writers/Ms.hs
+
+diff --git a/pandoc.cabal b/pandoc.cabal
+index a36f3942c..83c7f1805 100644
+--- a/pandoc.cabal
++++ b/pandoc.cabal
+@@ -816,6 +816,7 @@ test-suite test-pandoc
+                   Tests.Writers.FB2
+                   Tests.Writers.Powerpoint
+                   Tests.Writers.OOXML
++                  Tests.Writers.Ms
+   if os(windows)
+     cpp-options:      -D_WINDOWS
+   default-language: Haskell2010
+diff --git a/test/Tests/Writers/Ms.hs b/test/Tests/Writers/Ms.hs
+new file mode 100644
+index 000000000..d73603314
+--- /dev/null
++++ b/test/Tests/Writers/Ms.hs
+@@ -0,0 +1,37 @@
++{-# LANGUAGE NoImplicitPrelude #-}
++{-# LANGUAGE OverloadedStrings #-}
++module Tests.Writers.Ms (tests) where
++
++import Prelude
++import Test.Tasty
++import Tests.Helpers
++import Text.Pandoc
++import Text.Pandoc.Builder
++
++infix 4 =:
++(=:) :: (ToString a, ToPandoc a)
++     => String -> (a, String) -> TestTree
++(=:) = test (purely (writeMs def . toPandoc))
++
++tests :: [TestTree]
++tests = [ testGroup "code blocks"
++          [ "basic"
++              =: codeBlock "hello"
++              =?> unlines
++              [ ".IP"
++              , ".nf"
++              , "\\f[C]"
++              , "hello"
++              , "\\f[]"
++              , ".fi"]
++          , "escape starting ."
++              =: codeBlock ". hello"
++              =?> unlines
++              [ ".IP"
++              , ".nf"
++              , "\\f[C]"
++              , "\\&. hello"
++              , "\\f[]"
++              , ".fi"]
++          ]
++        ]
+diff --git a/test/test-pandoc.hs b/test/test-pandoc.hs
+index ff7661094..d0a1a6f18 100644
+--- a/test/test-pandoc.hs
++++ b/test/test-pandoc.hs
+@@ -37,6 +37,7 @@ import qualified Tests.Writers.JATS
+ import qualified Tests.Writers.Jira
+ import qualified Tests.Writers.LaTeX
+ import qualified Tests.Writers.Markdown
++import qualified Tests.Writers.Ms
+ import qualified Tests.Writers.Muse
+ import qualified Tests.Writers.Native
+ import qualified Tests.Writers.Org
+@@ -70,6 +71,7 @@ tests pandocPath = testGroup "pandoc tests"
+           , testGroup "Muse" Tests.Writers.Muse.tests
+           , testGroup "FB2" Tests.Writers.FB2.tests
+           , testGroup "PowerPoint" Tests.Writers.Powerpoint.tests
++          , testGroup "Ms" Tests.Writers.Ms.tests
+           ]
+         , testGroup "Readers"
+           [ testGroup "LaTeX" Tests.Readers.LaTeX.tests
+-- 
+2.25.1
+
