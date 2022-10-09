@@ -1,0 +1,45 @@
+{
+    "id": "pandoc-2",
+    "repositoryurl": "git@github.com:jgm/pandoc",
+    "repository": "pandoc",
+    "license": "GPLv2",
+    "faultcommit": "6b7a68869593bbf8097bbcd39021fcaa3523270e",
+    "fixcommit": "e146b1ff3b1c4204a678269a967d94f1df4b38c0",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
+
+    "testpatch": true,
+    "description": "When a file was rendered into DOCX with two tables in them, the space between them would be deleted when there was some comment block in-between. However, the comment should be ignored and a paragraph should be inserted anyway for spacing.",
+    "categories": ["integration-test", "golden-test"],
+    
+    "relatedissues": ["https://github.com/jgm/pandoc/issues/7724"],
+    "relatedprs": ["https://github.com/jgm/pandoc/pull/7844"],
+    
+    "faultlocations" : [
+    {
+        "startline": 772,
+        "endline": 772,
+        "file": "src/Text/Pandoc/Writers/Docx.hs",
+        "module": "Text.Pandoc.Writers.Docx",
+        "function": "blocksToOpenXML"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 772,
+        "endline": 772,
+        "file": "src/Text/Pandoc/Writers/Docx.hs",
+        "module": "Text.Pandoc.Writers.Docx",
+        "function": "blocksToOpenXML"
+    },
+    {
+        "startline": 774,
+        "endline": 776,
+        "file": "src/Text/Pandoc/Writers/Docx.hs",
+        "module": "Text.Pandoc.Writers.Docx",
+        "function": "isForeignRawBlock"
+    }
+    ]
+}
