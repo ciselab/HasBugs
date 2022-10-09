@@ -77,41 +77,56 @@ off-by-one, path-trimming, integration-test
 
 
 ### Bug 3:
+Completions did not contain locally defined type families. The fix is to add type family definitions in class declarations.
 
-
-Fix commit:
-Fault commit:
+Fix commit: c3c73cf30bf8b59182e6df674e3f804b55b062ea
+Fault commit: 771d8f44e694c70d0ee487f2bd6d095fd5e1b99f
 
 PRS:
+https://github.com/haskell/haskell-language-server/pull/2987
 
 Issues:
 
 Fix:
+ghcide/src/Development/IDE/Plugin/Completions/Logic.hs
+From: 465-465, 469-469
+To: 465-465, 469-471
 
 Test:
+test/functional/Completion.hs
 
 GHC: 8.10.7
 
 Categories:
+integration-test
 
 
 ### Bug 4:
+Location of generated imports is somewhat incorrect, it may be inserted before the 'where' of a module declaration. 
 
-
-Fix commit:
-Fault commit:
+Fix commit: 0b8c793dfdf0d6adb1d4704343fa512c7646a15a
+Fault commit: cdc8f78a9852ed35cbfccc191a0b87f59dc9e271
 
 PRS:
+https://github.com/haskell/haskell-language-server/pull/2981
 
 Issues:
+https://github.com/haskell/haskell-language-server/issues/2414
 
 Fix:
+ghcide/src/Development/IDE/Plugin/CodeAction.hs
+From: 1391-1392, 1397-1403
+To: 1412-1419, 1424-1428, 1430-1494
 
 Test:
+ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs
+ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.hs
+ghcide/test/exe/Main.hs
 
 GHC: 8.10.7
 
 Categories:
+integration-test
 
 
 ### Bug 5:
@@ -127,6 +142,53 @@ Issues:
 Fix:
 
 Test:
+
+GHC: 8.10.7
+
+Categories:
+
+
+
+### Bug -1:
+Don't think this would make for a good test, since we would need to test that an added warning is thrown.
+
+Fix commit: c045857ecbb00c0c0757e3e3ef5fefcd3a4dac99
+Fault commit: 100b53a4744c21501c925d8a9261c38b840f69be
+
+PRS:
+https://github.com/haskell/haskell-language-server/pull/2995
+
+Issues:
+
+Fix:
+
+Test:
+Needs one!
+
+GHC: 8.10.7
+
+Categories:
+
+
+### Bug -2:
+Bug reads more like an error-by-design at first rather than a mistake.
+
+Fix commit:
+Fault commit:
+
+PRS:
+https://github.com/haskell/haskell-language-server/pull/2788
+
+Issues:
+https://github.com/haskell/haskell-language-server/issues/2786
+
+Fix:
+ghcide/src/Development/IDE/Plugin/Completions/Logic.hs
+
+
+Test:
+ghcide/test/exe/Main.hs
+test/functional/Completion.hs
 
 GHC: 8.10.7
 

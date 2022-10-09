@@ -1,0 +1,184 @@
+From 0b8c793dfdf0d6adb1d4704343fa512c7646a15a Mon Sep 17 00:00:00 2001
+From: Kobayashi <contact@zelinf.net>
+Date: Mon, 27 Jun 2022 10:01:54 +0800
+Subject: [PATCH] fix new import position (#2981)
+
+* #2414 fix new import position
+
+* fix auto import for ghc version < 9.2
+
+* re-fix it for ghc-9.2
+
+* handle comments
+
+* add more comments
+
+* reword comments of findPositionNoImports
+
+Co-authored-by: Pepe Iborra <pepeiborra@gmail.com>
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+---
+ .../src/Development/IDE/Plugin/CodeAction.hs  | 165 ++++++++++++++----
+ .../src/Development/IDE/Plugin/Completions.hs |   5 +-
+ ...owerInFileWithCommentsBeforeIt.expected.hs |  20 +++
+ ...hereDeclLowerInFileWithCommentsBeforeIt.hs |  19 ++
+ ghcide/test/exe/Main.hs                       |  50 +++---
+ 5 files changed, 193 insertions(+), 66 deletions(-)
+ create mode 100644 ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs
+ create mode 100644 ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.hs
+
+diff --git a/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs b/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs
+new file mode 100644
+index 00000000..9ea40643
+--- /dev/null
++++ b/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs
+@@ -0,0 +1,20 @@
++module Asdf
++ (f
++ , where')
++-- hello
++-- world
++
++ where
++import Data.Int
++
++
++
++f :: Int64 -> Int64
++f = id'
++  where id' = id
++
++g :: Int -> Int
++g = id
++
++where' :: Int -> Int
++where' = id
+diff --git a/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.hs b/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.hs
+new file mode 100644
+index 00000000..d79ea57f
+--- /dev/null
++++ b/ghcide/test/data/import-placement/WhereDeclLowerInFileWithCommentsBeforeIt.hs
+@@ -0,0 +1,19 @@
++module Asdf
++ (f
++ , where')
++-- hello
++-- world
++
++ where
++
++
++
++f :: Int64 -> Int64
++f = id'
++  where id' = id
++
++g :: Int -> Int
++g = id
++
++where' :: Int -> Int
++where' = id
+diff --git a/ghcide/test/exe/Main.hs b/ghcide/test/exe/Main.hs
+index b44e8650..af8ae70d 100644
+--- a/ghcide/test/exe/Main.hs
++++ b/ghcide/test/exe/Main.hs
+@@ -85,9 +85,9 @@ import           System.Environment.Blank                 (getEnv, setEnv,
+                                                            unsetEnv)
+ import           System.Exit                              (ExitCode (ExitSuccess))
+ import           System.FilePath
+-import           System.IO.Extra                          hiding (withTempDir)
+-import qualified System.IO.Extra
+ import           System.Info.Extra                        (isMac, isWindows)
++import qualified System.IO.Extra
++import           System.IO.Extra                          hiding (withTempDir)
+ import           System.Mem                               (performGC)
+ import           System.Process.Extra                     (CreateProcess (cwd),
+                                                            createPipe, proc,
+@@ -95,7 +95,7 @@ import           System.Process.Extra                     (CreateProcess (cwd),
+ import           Test.QuickCheck
+ -- import Test.QuickCheck.Instances ()
+ import           Control.Concurrent.Async
+-import           Control.Lens                             (to, (^.), (.~))
++import           Control.Lens                             (to, (.~), (^.))
+ import           Control.Monad.Extra                      (whenJust)
+ import           Data.Function                            ((&))
+ import           Data.IORef
+@@ -123,8 +123,9 @@ import qualified HieDbRetry
+ import           Ide.PluginUtils                          (pluginDescToIdePlugins)
+ import           Ide.Types
+ import qualified Language.LSP.Types                       as LSP
++import           Language.LSP.Types.Lens                  (didChangeWatchedFiles,
++                                                           workspace)
+ import qualified Language.LSP.Types.Lens                  as L
+-import           Language.LSP.Types.Lens                  (workspace, didChangeWatchedFiles)
+ import qualified Progress
+ import           System.Time.Extra
+ import           Test.Tasty
+@@ -901,22 +902,21 @@ watchedFilesTests = testGroup "watched files"
+ 
+ insertImportTests :: TestTree
+ insertImportTests = testGroup "insert import"
+-  [ expectFailBecause
+-      ("'findPositionFromImportsOrModuleDecl' function adds import directly under line with module declaration, "
+-      ++ "not accounting for case when 'where' keyword is placed on lower line")
+-      (checkImport
+-         "module where keyword lower in file no exports"
+-         "WhereKeywordLowerInFileNoExports.hs"
+-         "WhereKeywordLowerInFileNoExports.expected.hs"
+-         "import Data.Int")
+-  , expectFailBecause
+-      ("'findPositionFromImportsOrModuleDecl' function adds import directly under line with module exports list, "
+-      ++ "not accounting for case when 'where' keyword is placed on lower line")
+-      (checkImport
+-         "module where keyword lower in file with exports"
+-         "WhereDeclLowerInFile.hs"
+-         "WhereDeclLowerInFile.expected.hs"
+-         "import Data.Int")
++  [ checkImport
++        "module where keyword lower in file no exports"
++        "WhereKeywordLowerInFileNoExports.hs"
++        "WhereKeywordLowerInFileNoExports.expected.hs"
++        "import Data.Int"
++  , checkImport
++        "module where keyword lower in file with exports"
++        "WhereDeclLowerInFile.hs"
++        "WhereDeclLowerInFile.expected.hs"
++        "import Data.Int"
++  , checkImport
++        "module where keyword lower in file with comments before it"
++        "WhereDeclLowerInFileWithCommentsBeforeIt.hs"
++        "WhereDeclLowerInFileWithCommentsBeforeIt.expected.hs"
++        "import Data.Int"
+   , expectFailBecause
+       "'findNextPragmaPosition' function doesn't account for case when shebang is not placed at top of file"
+       (checkImport
+@@ -5467,7 +5467,7 @@ completionDocTests =
+             -- We ignore doc uris since it points to the local path which determined by specific machines
+             case mn of
+                 Nothing -> txt
+-                Just n -> T.take n txt
++                Just n  -> T.take n txt
+             | CompletionItem {_documentation = Just (CompletionDocMarkup (MarkupContent MkMarkdown txt)), ..} <- compls
+             , _label == label
+             ]
+@@ -5767,13 +5767,13 @@ knownBrokenFor = knownIssueFor Broken
+ knownIssueFor :: IssueSolution -> BrokenTarget -> String -> TestTree -> TestTree
+ knownIssueFor solution = go . \case
+     BrokenSpecific bos vers -> isTargetOS bos && isTargetGhc vers
+-    BrokenForOS bos -> isTargetOS bos
+-    BrokenForGHC vers -> isTargetGhc vers
++    BrokenForOS bos         -> isTargetOS bos
++    BrokenForGHC vers       -> isTargetGhc vers
+     where
+         isTargetOS = \case
+             Windows -> isWindows
+-            MacOS -> isMac
+-            Linux -> not isWindows && not isMac
++            MacOS   -> isMac
++            Linux   -> not isWindows && not isMac
+ 
+         isTargetGhc = elem ghcVersion
+ 
+-- 
+2.25.1
+

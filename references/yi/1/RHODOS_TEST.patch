@@ -1,0 +1,33 @@
+From b254a2e1bc08b4b2a91caca3a84e32676aca7dff Mon Sep 17 00:00:00 2001
+From: Dmitry Ivanov <ethercrow@gmail.com>
+Date: Fri, 11 Aug 2017 21:15:06 +0200
+Subject: [PATCH] Make @@ play the last used macro
+
+---
+ yi-keymap-vim/src/Yi/Keymap/Vim/NormalMap.hs      | 15 ++++++++-------
+ .../tests/vimtests/macros/repeat_last_macro.test  | 12 ++++++++++++
+ 2 files changed, 20 insertions(+), 7 deletions(-)
+ create mode 100644 yi-keymap-vim/tests/vimtests/macros/repeat_last_macro.test
+
+diff --git a/yi-keymap-vim/tests/vimtests/macros/repeat_last_macro.test b/yi-keymap-vim/tests/vimtests/macros/repeat_last_macro.test
+new file mode 100644
+index 00000000..18a6f5a7
+--- /dev/null
++++ b/yi-keymap-vim/tests/vimtests/macros/repeat_last_macro.test
+@@ -0,0 +1,12 @@
++-- Input
++(2,2)
++qwf
++ars
++zxc
++-- Output
++(2,11)
++qwf
++arfoofoofoos
++zxc
++-- Events
++qaafoo<Esc>q@a@@
+\ No newline at end of file
+-- 
+2.25.1
+

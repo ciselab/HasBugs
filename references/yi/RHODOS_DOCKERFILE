@@ -1,0 +1,8 @@
+FROM haskell:8.2.2
+
+WORKDIR /build
+COPY . .
+
+RUN stack setup
+RUN stack test
+
