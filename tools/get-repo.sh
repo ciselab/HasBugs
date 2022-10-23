@@ -122,4 +122,5 @@ fi
 # Move the Dockerfile in.
 echo "Moving the Rhodos Dockerfile to project repository"
 cp "$docker_file" ./
+touch "RHODOS_DOCKERFILE.dockerignore"
 
