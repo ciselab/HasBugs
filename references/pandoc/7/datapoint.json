@@ -1,0 +1,44 @@
+{
+    "id": "pandoc-7",
+    "repositoryurl": "git@github.com:jgm/pandoc",
+    "repository": "pandoc",
+    "license": "GPLv2",
+    "faultcommit": "3766e03c7d2e4fb0378bb9de1420fa4f6c8107a2",
+    "fixcommit": "482a2e50798481f484267bdcfb7b305ea7bd7971",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
+
+    "testpatch": true,
+    "description": "Empty table cells were filtered out when reading LaTeX tables without handling multirows and multicols properly. By adding code for recognising multicols/rows correctly, empty cells can now be filtered without shifting other cells out of place.",
+    "categories": ["unit-test"],
+    
+    "relatedissues": ["https://github.com/jgm/pandoc/issues/6681"],
+    "relatedprs": ["https://github.com/jgm/pandoc/pull/6608"],
+    
+    "faultlocations" : [
+    {
+        "startline": 5,
+        "endline": 15,
+        "file" : "./project/.../Module.hs",
+        "module" : "Fully.Qualified.Module",
+        "function": "main"
+    },{
+        "startline": 25,
+        "endline": 35,
+        "file": "./project/.../Module.hs",
+        "module": "Fully.Qualified.Module",
+        "function": "helper"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 5,
+        "endline": 20,
+        "file": "./project/.../Module.hs",
+        "module": "Fully.Qualified.Module",
+        "function": "main"
+    }
+    ]
+}

@@ -61,7 +61,7 @@ Categories:
 integration-test, golden-test
 
 
-### Bug 3:
+### Bug 3: (TESTS FAIL TO RUN: tasty-lua fails to compile...)
 When multiple paragraphs were present under a single list item, DOCXs would annotate each paragraph with the list item number, but should instead only annotate the first. Fix is to add a marker that is set when the first annotation is done and checked on every subsequent annotation.
 
 Fix commit: 5001fd3f4d0daee5802a78f6d99d538ff9db4336
@@ -95,6 +95,10 @@ GHC: 8.10.7
 Categories: 
 integration-test, golden-test
 
+Notes:
+Cannot get this test to pass without changing the versions on hslua and tasty-lua.
+Somehow tasty-lua does not compile now...
+
 
 ### Bug 4: (TESTS FAIL SUCCESSFULLY)
 Formatting in code blocks is not allowed by pandoc, causing bold code to be possible but a code block with parts bold in it impossible for LaTeX. The fix is to make sure formatting of a code block happens outside of the codeblock.
@@ -126,10 +130,10 @@ test/command/7525.md
 GHC: 8.10.7
 
 Categories:
-integration-test
+system-test
 
 
-### Bug 5:
+### Bug 5: (TESTS FAIL SUCCESSFULLY)
 When a code-block starts with a period, ROFF MS interpreted this as a command rather than a part of the code-block. The solution is to escape the periods.
 
 Fix commit: c3b170be1c3c11465e5b0a64b6f59c875323a592
@@ -157,6 +161,57 @@ Categories:
 integration-test, close-to-unit-test
 
 
+### Bug 6: (TESTS FAIL SUCCESSFULLY)
+Inline Markdown code-blocks had a slight parsing/priority problem. Code blocks with '(1)' in them would be wrongly delimited. 
+
+Fix commit: 83c1ce1d77d3ef058e4e5c645a8eb0379fab780f
+Fault commit: b64ece76cb9f21e41b19678dc8ae247dbe9ab4cc
+
+PRS:
+https://github.com/jgm/pandoc/pull/6289
+
+Issues:
+https://github.com/jgm/pandoc/issues/6284
+
+Fix:
+src/Text/Pandoc/Readers/Markdown.hs
+Text.Pandoc.Readers.Markdown
+code
+From: 1520-1525
+To: 1520-1530
+
+Test:
+test/Tests/Readers/Markdown.hs
+
+GHC: 8.10.7
+
+Categories: 
+unit-test
+
+
+### Bug 7: 
+Empty table cells were filtered out when reading LaTeX tables without handling multirows and multicols properly. By adding code for recognising multicols/rows correctly, empty cells can now be filtered without shifting other cells out of place.
+
+Fix commit: 482a2e50798481f484267bdcfb7b305ea7bd7971
+Fault commit: 3766e03c7d2e4fb0378bb9de1420fa4f6c8107a2
+
+PRS:
+https://github.com/jgm/pandoc/pull/6608
+
+Issues:
+https://github.com/jgm/pandoc/issues/6681
+
+Fix:
+src/Text/Pandoc/Readers/LaTeX.hs
+Text.Pandoc.Readers.LaTeX
+
+Test:
+test/Tests/Readers/LaTeX.hs
+
+GHC: 8.10.7
+
+Categories: 
+unit-test
 
 ## Possible bugs
 

@@ -1,0 +1,61 @@
+From 482a2e50798481f484267bdcfb7b305ea7bd7971 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Laurent=20P=2E=20Ren=C3=A9=20de=20Cotret?=
+ <LaurentRDC@users.noreply.github.com>
+Date: Sat, 15 Aug 2020 14:40:10 -0400
+Subject: [PATCH] [Latex Reader] Fixing issues with \multirow and \multicolumn
+ table cells (#6608)
+
+* Added test to replicate (#6596)
+
+* Table cell reader not consuming spaces correctly (#6596)
+
+* Prevented wrong nesting of \multicolumn and \multirow table cells (#6603)
+
+* Parse empty table cells (#6603)
+
+* Support full prototype for multirow macro (#6603)
+
+Closes #6603
+---
+ src/Text/Pandoc/Readers/LaTeX.hs | 76 ++++++++++++++++++++------------
+ test/Tests/Readers/LaTeX.hs      | 17 +++++--
+ 2 files changed, 61 insertions(+), 32 deletions(-)
+
+diff --git a/test/Tests/Readers/LaTeX.hs b/test/Tests/Readers/LaTeX.hs
+index a8d969659..87074e990 100644
+--- a/test/Tests/Readers/LaTeX.hs
++++ b/test/Tests/Readers/LaTeX.hs
+@@ -157,17 +157,26 @@ tests = [ testGroup "tokenization"
+                    ]
+           , "Table with multirow item" =:
+             T.unlines ["\\begin{tabular}{c}"
+-                      ,"\\multirow{2}{c}{One}\\\\Two\\\\"
++                      ,"\\multirow{2}{5em}{One}\\\\Two\\\\"
+                       ,"\\end{tabular}"
+                       ] =?>
+             table' [AlignCenter]
+-                  [ Row nullAttr [ cell AlignCenter (RowSpan 2) (ColSpan 1) (plain "One") ]
++                  [ Row nullAttr [ cell AlignDefault (RowSpan 2) (ColSpan 1) (plain "One") ]
++                  , Row nullAttr [ simpleCell (plain "Two") ]
++                  ]
++          , "Table with multirow item using full prototype" =:
++            T.unlines ["\\begin{tabular}{c}"
++                      ,"\\multirow[c]{2}[3]{5em}[1in]{One}\\\\Two\\\\"
++                      ,"\\end{tabular}"
++                      ] =?>
++            table' [AlignCenter]
++                  [ Row nullAttr [ cell AlignDefault (RowSpan 2) (ColSpan 1) (plain "One") ]
+                   , Row nullAttr [ simpleCell (plain "Two") ]
+                   ]
+           , "Table with nested multirow/multicolumn item" =:
+             T.unlines [ "\\begin{tabular}{c c c}"
+-                      , "\\multirow{2}{c}{\\multicolumn{2}{c}{One}}&Two\\\\"
+-                      , "Three\\\\"
++                      , "\\multicolumn{2}{c}{\\multirow{2}{5em}{One}}&Two\\\\"
++                      , "& & Three\\\\"
+                       , "Four&Five&Six\\\\"
+                       , "\\end{tabular}"
+                       ] =?>
+-- 
+2.25.1
+
