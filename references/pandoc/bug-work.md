@@ -189,7 +189,7 @@ Categories:
 unit-test
 
 
-### Bug 7: 
+### Bug 7: (TESTS FAIL SUCCESSFULLY)
 Empty table cells were filtered out when reading LaTeX tables without handling multirows and multicols properly. By adding code for recognising multicols/rows correctly, empty cells can now be filtered without shifting other cells out of place.
 
 Fix commit: 482a2e50798481f484267bdcfb7b305ea7bd7971

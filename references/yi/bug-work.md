@@ -1,4 +1,4 @@
-### Bug 1:
+### Bug 1: (CANT RUN THIS CRAP, TOO OLD)
 @@ should replay the last used macro with Vim bindings, but didn't.
 
 Fix commit: 909ef8329157fc89850a76e22a3542423ca371ac
@@ -25,23 +25,32 @@ Categories:
 integration-test, golden-test
 
 
-### Bug 2:
+### Bug 2: (CANT RUN THIS CRAP, TOO OLD)
 
 
 Fix commit:
 Fault commit:
 
 PRS:
+https://github.com/yi-editor/yi/pull/890
 
 Issues:
+https://github.com/yi-editor/yi/issues/887
 
 Fix:
+src/library/Yi/Keymap/Vim/VisualMap.hs
+Yi.Keymap.Vim.VisualMap
+textObjectBinding
+From: 140-140, 143-143
+To: 140-142, 145-145
 
 Test:
+src/tests/vimtests/visual/v3iwx.test
 
 GHC: 8.10.7
 
 Categories: 
+integration-test, golden-test
 
 
 ### Bug 3:
