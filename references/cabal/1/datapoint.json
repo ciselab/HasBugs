@@ -1,0 +1,44 @@
+{
+    "id": "cabal-1",
+    "repositoryurl": "git@github.com:haskell/cabal",
+    "repository": "cabal",
+    "license": "BSD-3",
+    "faultcommit": "0184445b83af20dd9bb0e2ec09a8ba4b8d14a755",
+    "fixcommit": "55e036a2c40586bc0f69aaa7d85aab931a0a5c80",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
+
+    "testpatch": true,
+    "description": "'cabal run' termination does not terminate all child processes automatically as well. The solution is to use 'withCreateProcess' rather than 'createProcess' and throw an asynchronous exception from the main thread when a termination is wanted.",
+    "categories": ["system-test"],
+    
+    "relatedissues": ["https://github.com/haskell/cabal/issues/7914"],
+    "relatedprs": ["https://github.com/haskell/cabal/pull/7921", "https://github.com/haskell/cabal/pull/7757"],
+    
+    "faultlocations" : [
+    {
+        "startline": 5,
+        "endline": 15,
+        "file" : "./project/.../Module.hs",
+        "module" : "Fully.Qualified.Module",
+        "function": "main"
+    },{
+        "startline": 25,
+        "endline": 35,
+        "file": "./project/.../Module.hs",
+        "module": "Fully.Qualified.Module",
+        "function": "helper"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 5,
+        "endline": 20,
+        "file": "./project/.../Module.hs",
+        "module": "Fully.Qualified.Module",
+        "function": "main"
+    }
+    ]
+}
