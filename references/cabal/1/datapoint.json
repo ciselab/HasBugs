@@ -18,27 +18,51 @@
     "relatedprs": ["https://github.com/haskell/cabal/pull/7921", "https://github.com/haskell/cabal/pull/7757"],
     
     "faultlocations" : [
-    {
-        "startline": 5,
-        "endline": 15,
-        "file" : "./project/.../Module.hs",
-        "module" : "Fully.Qualified.Module",
-        "function": "main"
-    },{
-        "startline": 25,
-        "endline": 35,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "helper"
-    }
-    ],
-    "fixlocations" : [
-    {
-        "startline": 5,
-        "endline": 20,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "main"
-    }
-    ]
+     {
+        "startline": 127,
+        "endline": 127,
+        "file": "cabal/src/distribution/simple/program/run.hs",
+        "module": "distribution.simple.program.run",
+        "function": "runprograminvocation"
+     },{
+        "startline": 131,
+        "endline": 132,
+        "file": "cabal/src/distribution/simple/program/run.hs",
+        "module": "distribution.simple.program.run",
+        "function": "runprograminvocation"
+     },{
+         "startline": 1196,
+         "endline": 1197,
+         "file": "cabal-install/src/Distribution/Client/ProjectConfig.hs",
+         "module": "Distribution.Client.ProjectConfig",
+         "function": "syncAndReadSourcePackagesRemoteRepos"
+     }
+     ],
+     "fixlocations" : [
+     {
+        "startline": 127,
+        "endline": 127,
+        "file": "cabal/src/distribution/simple/program/run.hs",
+        "module": "distribution.simple.program.run",
+        "function": "runprograminvocation"
+     },{
+         "startline": 175,
+         "endline": 175,
+         "file": "cabal-install/main/Main.hs",
+         "module": "Main",
+         "function": "main"
+     },{
+         "startline": 1196,
+         "endline": 1196,
+         "file": "cabal-install/src/Distribution/Client/ProjectConfig.hs",
+         "module": "Distribution.Client.ProjectConfig",
+         "function": "syncAndReadSourcePackagesRemoteRepos"
+     },{
+         "startline": 1,
+         "endline": 49,
+         "file": "cabal-install/src/Distribution/Client/Signal.hs",
+         "module": "Distribution.Client.Signal",
+         "function": ""
+     }
+     ]
 }

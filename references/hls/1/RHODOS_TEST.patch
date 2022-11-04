@@ -85,7 +85,7 @@ index 66bcea62..21151dec 100644
          rename doc (Position 1 1) "baz"
 diff --git a/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs b/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs
 new file mode 100644
-index 00000000..f6618927
+index 00000000..f661x8927
 --- /dev/null
 +++ b/plugins/hls-rename-plugin/test/testdata/FieldPuns.expected.hs
 @@ -0,0 +1,8 @@
