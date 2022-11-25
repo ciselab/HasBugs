@@ -1,0 +1,59 @@
+{
+    "id": "shellcheck-2",
+    "repositoryurl": "git@github.com:koalaman/shellcheck/",
+    "repository": "shellcheck",
+    "license": "GPL3",
+    "faultcommit": "9eb63c97e6a5764b2fe0cb3e3e36cea5ade72a13",
+    "fixcommit": "0d58337cdd05d4d724ce1db4bcd6e1eb6c8721cf",
+    
+    "ghcversion": "9.2.5",
+    "buildframework": "stack",
+    "testframeworks": ["QuickCheck"],
+
+    "testpatch": true,
+    "description": "Shellcheck warned for elements within a range ([]) to be repetitive, but that also warned for wishfully repeated element such as variables.",
+    "categories": ["value-checks", "edge-case"],
+    
+    "relatedissues": ["https://github.com/koalaman/shellcheck/issues/2285", "https://github.com/koalaman/shellcheck/issues/2113"],
+    "relatedprs": [""],
+    
+    "faultlocations" : [
+    {
+        "startline": 2523,
+        "endline": 2523,
+        "file" : "./src/ShellCheck/Analytics.hs",
+        "module" : "ShellCheck.Analytics",
+        "function": "checkCharRangeGlob"
+    }
+    ],
+    "fixlocations" : [
+        {
+            "startline": 2525,
+            "endline": 2525,
+            "file" : "./src/ShellCheck/Analytics.hs",
+            "module" : "ShellCheck.Analytics",
+            "function": "checkCharRangeGlob"
+        },
+        {
+            "startline": 2544,
+            "endline": 2550,
+            "file" : "./src/ShellCheck/Analytics.hs",
+            "module" : "ShellCheck.Analytics",
+            "function": "checkCharRangeGlob"
+        },
+        {
+            "startline": 740,
+            "endline": 740,
+            "file" : "./src/ShellCheck/AnalyzerLib.hs",
+            "module" : "ShellCheck.AnalyzerLib",
+            "function": "getReferencedVariables"
+        },
+        {
+            "startline": 778,
+            "endline": 779,
+            "file" : "./src/ShellCheck/AnalyzerLib.hs",
+            "module" : "ShellCheck.AnalyzerLib",
+            "function": "getReferencedVariables"
+        }
+    ]
+}
