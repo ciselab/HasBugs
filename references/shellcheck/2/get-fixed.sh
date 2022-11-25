@@ -12,4 +12,4 @@ display_name=$(basename $(dirname $bug_dir))
 cd $bug_dir
 
 # Call get-fixed.sh script
-./get-fixed.sh "$display_name" "$bug_id"
+../../../tools/get-fixed.sh "$display_name" "$bug_id"

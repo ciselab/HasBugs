@@ -12,4 +12,4 @@ display_name=$(basename $(dirname $bug_dir))
 cd $bug_dir
 
 # Call get-buggy.sh script
-./get-buggy.sh "$display_name" "$bug_id"
+../../../tools/get-buggy.sh "$display_name" "$bug_id"
