@@ -1,0 +1,38 @@
+{
+    "id": "cabal-3",
+    "repositoryurl": "git@github.com:haskell/cabal",
+    "repository": "cabal",
+    "license": "BSD-3",
+    "faultcommit": "a49c1ddae0d768b6978cac76a50a01447e7066b6",
+    "fixcommit": "52cc82d430e6b9efa4024138119cc26b787d47ad",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
+
+    "testpatch": true,
+    "description": "'cabal HEAD' is confused by trailing whitespaces in 'default-language' tags. The solution is to fix parsing from 'some anyChar' to 'munch1 isAlphaNum'.",
+    "categories": ["system-test"],
+    
+    "relatedissues": ["https://github.com/haskell/cabal/issues/8507"],
+    "relatedprs": ["https://github.com/haskell/cabal/pull/8508"],
+    
+    "faultlocations" : [
+    {
+        "startline": 80,
+        "endline": 80,
+        "file" : "Cabal-syntax/src/Language/Haskell/Extension.hs",
+        "module" : "Language.Haskell.Extension",
+        "function": "parsec"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 80,
+        "endline": 80,
+        "file" : "Cabal-syntax/src/Language/Haskell/Extension.hs",
+        "module" : "Language.Haskell.Extension",
+        "function": "parsec"
+    }
+    ]
+}

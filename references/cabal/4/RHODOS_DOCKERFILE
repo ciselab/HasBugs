@@ -1,0 +1,13 @@
+FROM haskell:8.6.5
+
+WORKDIR /build
+COPY . .
+
+RUN cabal v2-update
+RUN cabal v2-build cabal-install cabal-testsuite
+
+RUN dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-testsuite-3/build/cabal-tests/cabal-tests \
+	--with-cabal dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-install-3.5.0.0/x/cabal/build/cabal/cabal \
+	cabal-testsuite/PackageTests/NewConfigure/ConfigFile/cabal.test.hs \
+	cabal-testsuite/PackageTests/NewFreeze/FreezeFile/new_freeze.test.hs
+

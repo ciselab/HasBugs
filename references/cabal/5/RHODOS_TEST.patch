@@ -1,0 +1,341 @@
+From d1736bd9df1554020aa2a5b1175ef70d9658cda5 Mon Sep 17 00:00:00 2001
+From: Patrick Augusto <ptkato.irl@gmail.com>
+Date: Sat, 23 Oct 2021 16:39:25 -0300
+Subject: [PATCH 1/2] Make cabal init conform with --no-comments flag for
+ commented fields
+
+---
+ .../src/Distribution/Client/Init/Format.hs    | 26 +++++++++----------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
+
+-- 
+2.25.1
+
+
+From 96375e57cec51dd5245df2f0c405050705c948be Mon Sep 17 00:00:00 2001
+From: Patrick Augusto <ptkato.irl@gmail.com>
+Date: Sat, 23 Oct 2021 16:44:52 -0300
+Subject: [PATCH 2/2] Adapting tests' outputs and fixing naming
+
+---
+ .../Distribution/Client/Init/Golden.hs        | 19 ++++++++++---------
+ .../cabal-lib-and-exe-no-comments.golden      | 18 ------------------
+ .../golden/cabal/cabal-lib-no-comments.golden | 14 --------------
+ .../cabal/cabal-test-suite-no-comments.golden | 10 ----------
+ .../{exe.golden => exe-no-comments.golden}    |  4 ----
+ ...b-simple.golden => lib-no-comments.golden} |  4 ----
+ ...b.golden => lib-simple-no-comments.golden} |  4 ----
+ ...den => standalone-test-no-comments.golden} |  4 ----
+ ...ne-test.golden => test-no-comments.golden} |  4 ----
+ 9 files changed, 10 insertions(+), 71 deletions(-)
+ rename cabal-install/tests/fixtures/init/golden/exe/{exe.golden => exe-no-comments.golden} (62%)
+ rename cabal-install/tests/fixtures/init/golden/lib/{lib-simple.golden => lib-no-comments.golden} (62%)
+ rename cabal-install/tests/fixtures/init/golden/lib/{lib.golden => lib-simple-no-comments.golden} (62%)
+ rename cabal-install/tests/fixtures/init/golden/test/{test.golden => standalone-test-no-comments.golden} (67%)
+ rename cabal-install/tests/fixtures/init/golden/test/{standalone-test.golden => test-no-comments.golden} (67%)
+
+diff --git a/cabal-install/tests/UnitTests/Distribution/Client/Init/Golden.hs b/cabal-install/tests/UnitTests/Distribution/Client/Init/Golden.hs
+index faa9be382..6683b55d6 100644
+--- a/cabal-install/tests/UnitTests/Distribution/Client/Init/Golden.hs
++++ b/cabal-install/tests/UnitTests/Distribution/Client/Init/Golden.hs
+@@ -110,8 +110,8 @@ goldenExeTests
+     -> PackageName
+     -> TestTree
+ goldenExeTests v pkgIx pkgDir pkgName = testGroup "exe golden tests"
+-    [ goldenVsString "Empty flags, not simple, no options"
+-      (goldenExe "exe.golden") $
++    [ goldenVsString "Empty flags, not simple, no options, no comments"
++      (goldenExe "exe-no-comments.golden") $
+         let opts = WriteOpts False False True v pkgDir Executable pkgName defaultCabalVersion
+         in runGoldenExe opts exeArgs emptyFlags
+ 
+@@ -148,12 +148,13 @@ goldenLibTests
+     -> PackageName
+     -> TestTree
+ goldenLibTests v pkgIx pkgDir pkgName = testGroup "lib golden tests"
+-    [ goldenVsString "Empty flags, not simple, no options"
+-      (goldenLib "lib.golden") $
++    [ goldenVsString "Empty flags, not simple, no options, no comments"
++      (goldenLib "lib-no-comments.golden") $
+         let opts = WriteOpts False False True v pkgDir Library pkgName defaultCabalVersion
+         in runGoldenLib opts libArgs emptyFlags
+ 
+-    , goldenVsString "Empty flags, simple, no options" (goldenLib "lib-simple.golden") $
++    , goldenVsString "Empty flags, simple, no options, no comments"
++      (goldenLib "lib-simple-no-comments.golden") $
+         let opts = WriteOpts False False True v pkgDir Library pkgName defaultCabalVersion
+         in runGoldenLib opts libArgs emptyFlags
+ 
+@@ -190,8 +191,8 @@ goldenTestTests
+     -> PackageName
+     -> TestTree
+ goldenTestTests v pkgIx pkgDir pkgName = testGroup "test golden tests"
+-    [ goldenVsString "Empty flags, not simple, no options"
+-      (goldenTest "test.golden") $
++    [ goldenVsString "Empty flags, not simple, no options, no comments"
++      (goldenTest "test-no-comments.golden") $
+         let opts = WriteOpts False False True v pkgDir Library pkgName defaultCabalVersion
+         in runGoldenTest opts testArgs emptyFlags
+ 
+@@ -215,8 +216,8 @@ goldenTestTests v pkgIx pkgDir pkgName = testGroup "test golden tests"
+         let opts = WriteOpts False False False v pkgDir Library pkgName defaultCabalVersion
+         in runGoldenTest opts testArgs (emptyFlags {buildTools = Flag ["happy"]})
+     
+-    , goldenVsString "Standalone tests, empty flags, not simple, no options"
+-      (goldenTest "standalone-test.golden") $
++    , goldenVsString "Standalone tests, empty flags, not simple, no options, no comments"
++      (goldenTest "standalone-test-no-comments.golden") $
+         let opts = WriteOpts False False True v pkgDir TestSuite pkgName defaultCabalVersion
+         in runGoldenTest opts testArgs emptyFlags
+ 
+diff --git a/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-and-exe-no-comments.golden b/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-and-exe-no-comments.golden
+index 7fd052c7d..bc7503d87 100644
+--- a/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-and-exe-no-comments.golden
++++ b/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-and-exe-no-comments.golden
+@@ -2,22 +2,16 @@ cabal-version:      3.0
+ name:               y
+ version:            0.1.0.0
+ synopsis:           synopsis
+-
+--- A longer description of the package.
+ -- description:
+ homepage:           home
+ license:            BSD-3-Clause
+ license-file:       LICENSE
+ author:             foo-kmett
+ maintainer:         foo-kmett@kmett.kmett
+-
+--- A copyright notice.
+ -- copyright:
+ category:           Data
+ build-type:         Simple
+ extra-doc-files:    CHANGELOG.md
+-
+--- Extra source files to be distributed with the package, such as examples, or a tutorial module.
+ -- extra-source-files:
+ 
+ common warnings
+@@ -26,11 +20,7 @@ common warnings
+ library
+     import:           warnings
+     exposed-modules:  MyLib
+-
+-    -- Modules included in this library but not exported.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:    base
+     hs-source-dirs:   src
+@@ -39,11 +29,7 @@ library
+ executable y
+     import:           warnings
+     main-is:          Main.hs
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:
+         base,
+@@ -55,11 +41,7 @@ executable y
+ test-suite y-test
+     import:           warnings
+     default-language: Haskell2010
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     type:             exitcode-stdio-1.0
+     hs-source-dirs:   test
+diff --git a/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-no-comments.golden b/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-no-comments.golden
+index 8412d365e..5fceb69a7 100644
+--- a/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-no-comments.golden
++++ b/cabal-install/tests/fixtures/init/golden/cabal/cabal-lib-no-comments.golden
+@@ -2,22 +2,16 @@ cabal-version:      3.0
+ name:               y
+ version:            0.1.0.0
+ synopsis:           synopsis
+-
+--- A longer description of the package.
+ -- description:
+ homepage:           home
+ license:            BSD-3-Clause
+ license-file:       LICENSE
+ author:             foo-kmett
+ maintainer:         foo-kmett@kmett.kmett
+-
+--- A copyright notice.
+ -- copyright:
+ category:           Data
+ build-type:         Simple
+ extra-doc-files:    CHANGELOG.md
+-
+--- Extra source files to be distributed with the package, such as examples, or a tutorial module.
+ -- extra-source-files:
+ 
+ common warnings
+@@ -26,11 +20,7 @@ common warnings
+ library
+     import:           warnings
+     exposed-modules:  MyLib
+-
+-    -- Modules included in this library but not exported.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:    base
+     hs-source-dirs:   src
+@@ -39,11 +29,7 @@ library
+ test-suite y-test
+     import:           warnings
+     default-language: Haskell2010
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     type:             exitcode-stdio-1.0
+     hs-source-dirs:   test
+diff --git a/cabal-install/tests/fixtures/init/golden/cabal/cabal-test-suite-no-comments.golden b/cabal-install/tests/fixtures/init/golden/cabal/cabal-test-suite-no-comments.golden
+index d853443a7..ab5329bfa 100644
+--- a/cabal-install/tests/fixtures/init/golden/cabal/cabal-test-suite-no-comments.golden
++++ b/cabal-install/tests/fixtures/init/golden/cabal/cabal-test-suite-no-comments.golden
+@@ -2,22 +2,16 @@ cabal-version:      3.0
+ name:               y
+ version:            0.1.0.0
+ synopsis:           synopsis
+-
+--- A longer description of the package.
+ -- description:
+ homepage:           home
+ license:            BSD-3-Clause
+ license-file:       LICENSE
+ author:             foo-kmett
+ maintainer:         foo-kmett@kmett.kmett
+-
+--- A copyright notice.
+ -- copyright:
+ category:           Data
+ build-type:         Simple
+ extra-doc-files:    CHANGELOG.md
+-
+--- Extra source files to be distributed with the package, such as examples, or a tutorial module.
+ -- extra-source-files:
+ 
+ common warnings
+@@ -26,11 +20,7 @@ common warnings
+ test-suite y-test
+     import:           warnings
+     default-language: Haskell2010
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     type:             exitcode-stdio-1.0
+     hs-source-dirs:   test
+diff --git a/cabal-install/tests/fixtures/init/golden/exe/exe.golden b/cabal-install/tests/fixtures/init/golden/exe/exe-no-comments.golden
+similarity index 62%
+rename from cabal-install/tests/fixtures/init/golden/exe/exe.golden
+rename to cabal-install/tests/fixtures/init/golden/exe/exe-no-comments.golden
+index 033ab48ab..3f5464cda 100644
+--- a/cabal-install/tests/fixtures/init/golden/exe/exe.golden
++++ b/cabal-install/tests/fixtures/init/golden/exe/exe-no-comments.golden
+@@ -1,11 +1,7 @@
+ executable y
+     import:           warnings
+     main-is:          Main.hs
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:    base
+     hs-source-dirs:   exe
+diff --git a/cabal-install/tests/fixtures/init/golden/lib/lib-simple.golden b/cabal-install/tests/fixtures/init/golden/lib/lib-no-comments.golden
+similarity index 62%
+rename from cabal-install/tests/fixtures/init/golden/lib/lib-simple.golden
+rename to cabal-install/tests/fixtures/init/golden/lib/lib-no-comments.golden
+index 0b407100b..6d596b9a8 100644
+--- a/cabal-install/tests/fixtures/init/golden/lib/lib-simple.golden
++++ b/cabal-install/tests/fixtures/init/golden/lib/lib-no-comments.golden
+@@ -1,11 +1,7 @@
+ library
+     import:           warnings
+     exposed-modules:  MyLib
+-
+-    -- Modules included in this library but not exported.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:    base
+     hs-source-dirs:   src
+diff --git a/cabal-install/tests/fixtures/init/golden/lib/lib.golden b/cabal-install/tests/fixtures/init/golden/lib/lib-simple-no-comments.golden
+similarity index 62%
+rename from cabal-install/tests/fixtures/init/golden/lib/lib.golden
+rename to cabal-install/tests/fixtures/init/golden/lib/lib-simple-no-comments.golden
+index 0b407100b..6d596b9a8 100644
+--- a/cabal-install/tests/fixtures/init/golden/lib/lib.golden
++++ b/cabal-install/tests/fixtures/init/golden/lib/lib-simple-no-comments.golden
+@@ -1,11 +1,7 @@
+ library
+     import:           warnings
+     exposed-modules:  MyLib
+-
+-    -- Modules included in this library but not exported.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     build-depends:    base
+     hs-source-dirs:   src
+diff --git a/cabal-install/tests/fixtures/init/golden/test/test.golden b/cabal-install/tests/fixtures/init/golden/test/standalone-test-no-comments.golden
+similarity index 67%
+rename from cabal-install/tests/fixtures/init/golden/test/test.golden
+rename to cabal-install/tests/fixtures/init/golden/test/standalone-test-no-comments.golden
+index 014252e6b..b881e0a6a 100644
+--- a/cabal-install/tests/fixtures/init/golden/test/test.golden
++++ b/cabal-install/tests/fixtures/init/golden/test/standalone-test-no-comments.golden
+@@ -1,11 +1,7 @@
+ test-suite y-test
+     import:           warnings
+     default-language: Haskell2010
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     type:             exitcode-stdio-1.0
+     hs-source-dirs:   test
+diff --git a/cabal-install/tests/fixtures/init/golden/test/standalone-test.golden b/cabal-install/tests/fixtures/init/golden/test/test-no-comments.golden
+similarity index 67%
+rename from cabal-install/tests/fixtures/init/golden/test/standalone-test.golden
+rename to cabal-install/tests/fixtures/init/golden/test/test-no-comments.golden
+index 014252e6b..b881e0a6a 100644
+--- a/cabal-install/tests/fixtures/init/golden/test/standalone-test.golden
++++ b/cabal-install/tests/fixtures/init/golden/test/test-no-comments.golden
+@@ -1,11 +1,7 @@
+ test-suite y-test
+     import:           warnings
+     default-language: Haskell2010
+-
+-    -- Modules included in this executable, other than Main.
+     -- other-modules:
+-
+-    -- LANGUAGE extensions used by modules in this package.
+     -- other-extensions:
+     type:             exitcode-stdio-1.0
+     hs-source-dirs:   test
+-- 
+2.25.1
+

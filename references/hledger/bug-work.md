@@ -3,7 +3,7 @@ Too old, can't use this one... :(
 I can't easily install the library for it
 
 
-### Bug 2:
+### Bug 2: (TEST FAILED SUCCESSFULLY)
 
 
 Fix commit:
@@ -14,7 +14,7 @@ PRS:
 Issues:
 
 
-### Bug 3:
+### Bug 3: (TEST FAILED SUCCESSFULLY)
 Incorrect parsing for alias regexes, solved by adding the right 'between' and adding a line for allowing any character to be doubly escaped.
 
 Fix commit: a65e64115a1e19033c3d51bb1a89081e6a03d3aa
@@ -27,7 +27,7 @@ Issues:
 https://github.com/simonmichael/hledger/issues/982
 
 
-### Bug 4:
+### Bug 4: (TEST FAILED SUCCESSFULLY)
 Auto-generated postings without explicit amount needed to be displayed with one. The fix is to generate an amount for auto-postings without one.
 
 Fix commit: 4006ab6d2d5623fbba9a64ae70722ac1b94da3ad

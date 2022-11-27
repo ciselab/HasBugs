@@ -1,4 +1,4 @@
-### Bug 1:
+### Bug 1: (TEST FAILED SUCCESSFULLY)
 When records are punned, there is a reference from pun to field declaration and from pun-name use to pun-declaration, but no transitive one. Meaning refactoring did not propagate to the latter. Solution is a second pass to find indirect pun references and rename those as well.
 
 ```haskell
@@ -42,7 +42,7 @@ Categories:
 integration-test
 
 
-### Bug 2:
+### Bug 2: (TEST FAILED SUCCESSFULLY)
 First character of a suggested module name is dropped when `hs-source-dirs` is assigned simply as '.' ('./' was expected). Fix is to canonicalise the path to always include the '/' and then trim it. (The PR also adds cleaner logging for debugging)
 
 Fix commit: 49373fd01465d56146fa5f1ceded3907ad520ca0
@@ -76,7 +76,7 @@ Categories:
 off-by-one, path-trimming, integration-test
 
 
-### Bug 3:
+### Bug 3: (TEST FAILED SUCCESSFULLY)
 Completions did not contain locally defined type families. The fix is to add type family definitions in class declarations.
 
 Fix commit: c3c73cf30bf8b59182e6df674e3f804b55b062ea
@@ -101,7 +101,7 @@ Categories:
 integration-test
 
 
-### Bug 4:
+### Bug 4: (TEST FAILED SUCCESSFULLY)
 Location of generated imports is somewhat incorrect, it may be inserted before the 'where' of a module declaration. 
 
 Fix commit: 0b8c793dfdf0d6adb1d4704343fa512c7646a15a

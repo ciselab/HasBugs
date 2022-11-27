@@ -1,0 +1,113 @@
+From 5adaf5855c856f1f2400c1a5821bc97503b413bc Mon Sep 17 00:00:00 2001
+From: Duncan Coutts <duncan@community.haskell.org>
+Date: Sun, 26 Jun 2016 02:24:01 +0100
+Subject: [PATCH] Don't initialise package dbs concurrently
+
+Instead initialise all the ones we'll need in advance of building any
+packages. The alternative would have been to use a lock, but there's no
+particular advantage in trying to delay initialisation and avoiding
+locks keeps things simpler.
+
+This should fix #3460
+
+Another similar issue was fixed by 1acc00f which serialised the
+registration of packages in the local inplace package db, avoiding
+lost updates (which could previously be observed in test case T3460).
+---
+ .../Distribution/Client/ProjectBuilding.hs    | 15 ++++++++++--
+ .../Distribution/Client/ProjectPlanning.hs    | 24 ++++++++++---------
+ 2 files changed, 26 insertions(+), 13 deletions(-)
+
+diff --git a/cabal-install/Distribution/Client/ProjectBuilding.hs b/cabal-install/Distribution/Client/ProjectBuilding.hs
+index ba4c85585..65e78118c 100644
+--- a/cabal-install/Distribution/Client/ProjectBuilding.hs
++++ b/cabal-install/Distribution/Client/ProjectBuilding.hs
+@@ -575,7 +575,10 @@ rebuildTargets :: Verbosity
+ rebuildTargets verbosity
+                distDirLayout@DistDirLayout{..}
+                installPlan
+-               sharedPackageConfig
++               sharedPackageConfig@ElaboratedSharedConfig {
++                 pkgConfigCompiler      = compiler,
++                 pkgConfigCompilerProgs = progdb
++               }
+                pkgsBuildStatus
+                buildSettings@BuildTimeSettings{
+                  buildSettingNumJobs,
+@@ -593,6 +596,7 @@ rebuildTargets verbosity
+ 
+     createDirectoryIfMissingVerbose verbosity False distBuildRootDirectory
+     createDirectoryIfMissingVerbose verbosity False distTempDirectory
++    mapM_ (createPackageDBIfMissing verbosity compiler progdb) packageDBsToUse
+ 
+     -- Before traversing the install plan, pre-emptively find all packages that
+     -- will need to be downloaded and start downloading them.
+@@ -619,6 +623,14 @@ rebuildTargets verbosity
+     keepGoing       = buildSettingKeepGoing
+     withRepoCtx     = projectConfigWithBuilderRepoContext verbosity 
+                         buildSettings
++    packageDBsToUse = -- all the package dbs we may need to create
++      (Set.toList . Set.fromList)
++        [ pkgdb
++        | InstallPlan.Configured pkg <- InstallPlan.toList installPlan
++        , (pkgdb:_) <- map reverse [ pkgBuildPackageDBStack pkg,
++                                     pkgRegisterPackageDBStack pkg,
++                                     pkgSetupPackageDBStack pkg ]
++        ]
+ 
+ -- | Given all the context and resources, (re)build an individual package.
+ --
+@@ -1160,7 +1172,6 @@ buildInplaceUnpackedPackage verbosity
+         --      builddir is not enough, we also need the per-package cachedir
+         createDirectoryIfMissingVerbose verbosity False builddir
+         createDirectoryIfMissingVerbose verbosity False (distPackageCacheDirectory pkgid)
+-        createPackageDBIfMissing verbosity compiler progdb (pkgBuildPackageDBStack pkg)
+ 
+         -- Configure phase
+         --
+diff --git a/cabal-install/Distribution/Client/ProjectPlanning.hs b/cabal-install/Distribution/Client/ProjectPlanning.hs
+index bb653c1bf..91c94012b 100644
+--- a/cabal-install/Distribution/Client/ProjectPlanning.hs
++++ b/cabal-install/Distribution/Client/ProjectPlanning.hs
+@@ -622,8 +622,7 @@ getPackageDBContents verbosity compiler progdb platform packagedb = do
+                     verbosity compiler
+                     [packagedb] progdb platform)
+     liftIO $ do
+-      createPackageDBIfMissing verbosity compiler
+-                               progdb [packagedb]
++      createPackageDBIfMissing verbosity compiler progdb packagedb
+       Cabal.getPackageDBContents verbosity compiler
+                                  packagedb progdb
+ 
+@@ -641,16 +640,19 @@ getSourcePackages verbosity withRepoCtx = do
+                  $ repos
+     return sourcePkgDb
+ 
++
++-- | Create a package DB if it does not currently exist. Note that this action
++-- is /not/ safe to run concurrently.
++--
+ createPackageDBIfMissing :: Verbosity -> Compiler -> ProgramDb
+-                         -> PackageDBStack -> IO ()
+-createPackageDBIfMissing verbosity compiler progdb packageDbs =
+-  case reverse packageDbs of
+-    SpecificPackageDB dbPath : _ -> do
+-      exists <- liftIO $ Cabal.doesPackageDBExist dbPath
+-      unless exists $ do
+-        createDirectoryIfMissingVerbose verbosity False (takeDirectory dbPath)
+-        Cabal.createPackageDB verbosity compiler progdb False dbPath
+-    _ -> return ()
++                         -> PackageDB -> IO ()
++createPackageDBIfMissing verbosity compiler progdb
++                         (SpecificPackageDB dbPath) = do
++    exists <- liftIO $ Cabal.doesPackageDBExist dbPath
++    unless exists $ do
++      createDirectoryIfMissingVerbose verbosity False (takeDirectory dbPath)
++      Cabal.createPackageDB verbosity compiler progdb False dbPath
++createPackageDBIfMissing _ _ _ _ = return ()
+ 
+ 
+ getPkgConfigDb :: Verbosity -> ProgramDb -> Rebuild PkgConfigDb
+-- 
+2.25.1
+
