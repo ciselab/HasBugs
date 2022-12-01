@@ -1,0 +1,106 @@
+{
+    "id": "purescript-1",
+    "repositoryurl": "git@github.com:purescript/purescript",
+    "repository": "purescript",
+    "license": "Custom Copyleft",
+    "faultcommit": "3d6b8bf7ffee6c6be85580b7daa765a9b54d0564",
+    "fixcommit": "ea118aec3d54a4918825b1e438d3ae4bb9181447",
+    
+    "ghcversion": "9.2.4",
+    "buildframework": "cabal",
+    "testframeworks": ["hspec", "hunit", "quickcheck"],
+
+    "testpatch": true,
+    "description": "When users asked for possible values in Type Holes, the suggested values where (sometimes) duplicated",
+    "categories": ["desugaring-issue", "integration"],
+    
+    "relatedissues": ["https://github.com/purescript/purescript/issues/4373"],
+    "relatedprs": ["https://github.com/purescript/purescript/pull/4374"],
+    
+    "faultlocations" : [
+        {
+        "startline": 383,
+        "endline": 384,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    },{
+        "startline": 386,
+        "endline": 386,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    },
+    {
+        "startline": 394,
+        "endline": 395,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    },
+    {
+        "startline": 404,
+        "endline": 406,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    },
+    {
+        "startline": 410,
+        "endline": 410,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    },
+    {
+        "startline": 415,
+        "endline": 415,
+        "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+        "module" : "Language.PureScript.Sugar.CaseDeclarations",
+        "function": "makeCaseDeclaration"
+    }
+    ],
+    "fixlocations" : [
+        {
+            "startline": 383,
+            "endline": 384,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        },{
+            "startline": 386,
+            "endline": 386,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        },
+        {
+            "startline": 394,
+            "endline": 395,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        },
+        {
+            "startline": 404,
+            "endline": 406,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        },
+        {
+            "startline": 410,
+            "endline": 410,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        },
+        {
+            "startline": 415,
+            "endline": 415,
+            "file" : "./src/Language/PureScript/Sugar/CaseDeclarations.hs",
+            "module" : "Language.PureScript.Sugar.CaseDeclarations",
+            "function": "makeCaseDeclaration"
+        }
+    ]
+}

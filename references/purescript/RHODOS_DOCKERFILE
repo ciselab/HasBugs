@@ -1,0 +1,10 @@
+FROM haskell:9.2.4
+
+RUN apt-get install npm
+
+WORKDIR /build
+
+COPY . . 
+RUN cabal update
+
+RUN cabal test
