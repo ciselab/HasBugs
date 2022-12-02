@@ -80,10 +80,10 @@ EOF
 # Copy the Dockerfile to the directory if one is provided, or create an empty one
 if [ -z $docker_file ]; then
 	echo "Writing an empty Dockerfile to directory"
-	touch RHODOS_DOCKERFILE
+	touch HASBUGS_DOCKERFILE
 else
 	echo "Copying Dockerfile '$suffixed_docker_file' into directory"
-	cp "$docker_dir/$suffixed_docker_file" ./RHODOS_DOCKERFILE
+	cp "$docker_dir/$suffixed_docker_file" ./HASBUGS_DOCKERFILE
 fi
 
 

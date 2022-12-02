@@ -14,7 +14,7 @@ list_dir="$script_dir/../references"
 data_dir="$script_dir/../data"
 
 # Set the patch file name
-patch_file="RHODOS_TEST.patch"
+patch_file="HASBUGS_TEST.patch"
 
 
 # First argument to this script should be the display name of the project repository (as named in the directory structure as well).
@@ -39,10 +39,10 @@ fi
 # Source repository and/or bug informatiregexon
 if [[ -z "$bug_id" ]]; then
 	. "$list_dir/$display_name/metadata.config"
-	docker_file="$list_dir/$display_name/RHODOS_DOCKERFILE"
+	docker_file="$list_dir/$display_name/HASBUGS_DOCKERFILE"
 else
 	. "$list_dir/$display_name/$bug_id/metadata.config"
-	docker_file="$list_dir/$display_name/$bug_id/RHODOS_DOCKERFILE"
+	docker_file="$list_dir/$display_name/$bug_id/HASBUGS_DOCKERFILE"
 fi
 
 
@@ -74,9 +74,9 @@ echo "Going into '$target_dir'"
 cd "$target_dir"
 
 
-# Ensure we're not still in the Rhodos repository
-if [[ ! -z "$(git remote show origin | grep Rhodos)" ]]; then
-	echo "Still in Rhodos repository! Cannot continue git operations..."
+# Ensure we're not still in the HasBugs repository
+if [[ ! -z "$(git remote show origin | grep HasBugs)" ]]; then
+	echo "Still in HasBugs repository! Cannot continue git operations..."
 	exit 1
 fi
 
@@ -120,7 +120,7 @@ fi
 
 
 # Move the Dockerfile in.
-echo "Moving the Rhodos Dockerfile to project repository"
+echo "Moving the HasBugs Dockerfile and Dockerignore to project repository"
 cp "$docker_file" ./
-touch "RHODOS_DOCKERFILE.dockerignore"
+touch "HASBUGS_DOCKERFILE.dockerignore"
 

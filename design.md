@@ -11,7 +11,7 @@ Used to ID the bug by its repository and own automatically numbered ID.
 ##### Repository URL
 A clonable link to the repository. Most, if not all, of these will be github URLs.
 
-Example: https://github.com/ciselab/Rhodos
+Example: https://github.com/ciselab/HasBugs
 
 ##### License
 The license used by the repository at the moment of registering the bug.
@@ -83,7 +83,7 @@ docker/
 1. Inspect a project and note down information
 2. Run project setup script and input all project information. It will create:
    * A data directory for the project. (`{list-dir}/{project-name}`)
-   * A dockerfile if one cannot be copied from more general Dockerfiles. (under `{list-dir}/{project-name}/RHODOS_DOCKERFILE`)
+   * A dockerfile if one cannot be copied from more general Dockerfiles. (under `{list-dir}/{project-name}/HASBUGS_DOCKERFILE`)
    * A `metadata.config` file containing the project information.
    * An executable `create-bug.sh` file to create a new bug datapoint for that project.
    

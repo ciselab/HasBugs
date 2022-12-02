@@ -132,7 +132,7 @@ EOF
 
 # Copy the Dockerfile over
 echo "Copying Dockerfile into bug directory"
-cp ../RHODOS_DOCKERFILE RHODOS_DOCKERFILE
+cp ../HASBUGS_DOCKERFILE HASBUGS_DOCKERFILE
 
 
 

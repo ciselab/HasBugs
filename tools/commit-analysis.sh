@@ -16,13 +16,13 @@ display_name="$1"
 
 # Create a log file
 cd "$data_dir/$display_name"
-git log > rhodos.gitlog
+git log > hasbugs.gitlog
 
 echo ""
 
 # Count occurrences of issue-like text
-echo "Counting $(grep -Eo "#" rhodos.gitlog | wc -l) #'s"
-echo "Counting $(grep -Eo "#[0-9]{1,5}[^0-9]" rhodos.gitlog | wc -l) #'s with digits"
-echo "Counting $(grep -Eo "!" rhodos.gitlog | wc -l) !'s"
-echo "Counting $(grep -Eo "![0-9]{1,5}[^0-9]" rhodos.gitlog | wc -l) !'s with digits"
+echo "Counting $(grep -Eo "#" hasbugs.gitlog | wc -l) #'s"
+echo "Counting $(grep -Eo "#[0-9]{1,5}[^0-9]" hasbugs.gitlog | wc -l) #'s with digits"
+echo "Counting $(grep -Eo "!" hasbugs.gitlog | wc -l) !'s"
+echo "Counting $(grep -Eo "![0-9]{1,5}[^0-9]" hasbugs.gitlog | wc -l) !'s with digits"
 

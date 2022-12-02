@@ -35,5 +35,5 @@ data_dir="$script_dir/../data/$1-$2/tested"
 "$script_dir/get-tested.sh" "$1" "$2"
 
 echo "Running docker build to run tests"
-docker build -f "$data_dir/RHODOS_DOCKERFILE" "$data_dir"
+docker build -f "$data_dir/HASBUGS_DOCKERFILE" "$data_dir"
 
