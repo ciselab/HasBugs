@@ -64,6 +64,7 @@ cd "$(dirname $target_dir)"
 if [[ ! -d "$target_dir/.git" ]]; then
 	rm -rf "$target_dir"
 	echo "Cloning $repository_url"
+	#TODO: Maybe we can add a "heuristic depth" here, such as the last 50 commits. I think for most bugs that works. 
 	git clone "$repository_url" "$target_dir"
 else
 	echo "Already cloned repository"
