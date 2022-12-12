@@ -65,6 +65,7 @@ if [[ ! -d "$target_dir/.git" ]]; then
 	rm -rf "$target_dir"
 	echo "Cloning $repository_url"
 	#TODO: Maybe we can add a "heuristic depth" here, such as the last 50 commits. I think for most bugs that works. 
+	#Short Update: I tried with 120, but that failed on Pandoc. Maybe it is necessary to get the whole history. ¯\_(ツ)_/¯
 	git clone "$repository_url" "$target_dir"
 else
 	echo "Already cloned repository"
