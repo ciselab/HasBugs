@@ -5,5 +5,5 @@ COPY . .
 
 RUN cabal update
 RUN cabal build ghcide
-RUN cabal test ghcide
 
+RUN ["cabal","test","ghcide"]

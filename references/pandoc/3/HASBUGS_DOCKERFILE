@@ -10,6 +10,4 @@ RUN cabal update
 RUN cabal install --only-dependencies 
 RUN cabal configure --enable-tests
 RUN cabal build
-RUN cabal test
-
-
+ENTRYPOINT ["cabal","test"]

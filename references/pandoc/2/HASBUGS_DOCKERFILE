@@ -7,5 +7,4 @@ RUN sed -i "s/tasty\-hslua\-1\.0\.0/tasty\-hslua\-1\.0\.1/" stack.yaml
 RUN sed -i "s/tasty\-lua\-1\.0\.0/tasty\-lua\-1\.0\.1/" stack.yaml
 
 RUN stack setup
-RUN stack test
-
+ENTRYPOINT ["stack","test"]

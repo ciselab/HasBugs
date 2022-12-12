@@ -11,4 +11,6 @@ COPY src src
 
 COPY test test
 
-RUN cabal test
+RUN cabal build 
+
+ENTRYPOINT ["cabal","test"]

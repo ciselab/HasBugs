@@ -4,5 +4,6 @@ WORKDIR /build
 COPY . .
 
 RUN stack setup
-RUN stack test plugins/hls-module-name-plugin
+RUN stack build
 
+ENTRYPOINT ["stack","test","plugins/hls-module-name-plugin"]
