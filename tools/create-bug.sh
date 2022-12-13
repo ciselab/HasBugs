@@ -134,7 +134,8 @@ EOF
 echo "Copying Dockerfile into bug directory"
 cp ../HASBUGS_DOCKERFILE HASBUGS_DOCKERFILE
 
-
+echo "Initializing Bug-Version with 1.0.0"
+echo "1.0.0" > .hasbugs_version
 
 ## Create the scripts that can be used from this directory to get specific instantiations of the repository
 cat <<EOF > .temp.sh

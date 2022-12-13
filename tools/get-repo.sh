@@ -45,6 +45,7 @@ else
 	docker_file="$list_dir/$display_name/$bug_id/HASBUGS_DOCKERFILE"
 fi
 
+version_file="$list_dir/$display_name/$bug_id/.hasbugs_version"
 
 # The directory that the repository will be cloned into.
 if [[ "$target" == "latest" ]]; then
@@ -124,5 +125,6 @@ fi
 # Move the Dockerfile in.
 echo "Moving the HasBugs Dockerfile and Dockerignore to project repository"
 cp "$docker_file" ./
+cp "$version_file" ./
 touch "HASBUGS_DOCKERFILE.dockerignore"
 
