@@ -3,6 +3,7 @@
 # Blatantly stolen one-liner to get the directory that this script is located in,
 # rather than the location the script is called from.
 script_dir=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+SECONDS=0
 
 # Set the directory in which data is stored
 data_dir="$script_dir/../data"
@@ -15,4 +16,4 @@ mkdir "$data_dir"
 
 #TODO: Delete all related docker images
 
-echo "Finished HasBugs Cleanup"
+echo "Finished HasBugs Cleanup (took $SECONDS seconds)"

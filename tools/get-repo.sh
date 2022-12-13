@@ -63,10 +63,10 @@ cd "$(dirname $target_dir)"
 # Clone the repository into this directory
 if [[ ! -d "$target_dir/.git" ]]; then
 	rm -rf "$target_dir"
-	echo "Cloning $repository_url"
+	echo "Cloning $repository_url (quietly)"
 	#TODO: Maybe we can add a "heuristic depth" here, such as the last 50 commits. I think for most bugs that works. 
 	#Short Update: I tried with 120, but that failed on Pandoc. Maybe it is necessary to get the whole history. ¯\_(ツ)_/¯
-	git clone "$repository_url" "$target_dir"
+	git clone -q "$repository_url" "$target_dir"
 else
 	echo "Already cloned repository"
 fi
@@ -90,23 +90,23 @@ echo "Using fixed commit: $fix_commit"
 if [[ "$target" == "buggy" ]]; then
 	echo "Resetting to faulty commit: ${fault_commit}"
 	git reset --hard
-	git checkout -f "$fault_commit"
+	git checkout -q -f "$fault_commit"
 elif [[ "$target" == "fixed" ]]; then
 	echo "Resetting to fixed commit: ${fix_commit}"
 	git reset --hard
-	git checkout -f "$fix_commit"
+	git checkout -q -f "$fix_commit"
 elif [[ "$target" == "tested" && "$patch_test" ]]; then
 	echo "Resetting to faulty commit and patching with test"
 	git reset --hard
-	git checkout -f "$fault_commit"
+	git checkout -q -f "$fault_commit"
 
 	echo "Patching with patch file: ${patch_file}"
 	cp "${origin}/${patch_file}" ./
-	git apply "${patch_file}"
+	git apply --quiet "${patch_file}"
 elif [[ "$target" == "tested" ]]; then
 	echo "Resetting to fixed commit (with test?)"
 	git reset --hard
-	git checkout -f "$fix_commit"
+	git checkout -q -f "$fix_commit"
 else
 	echo "Not resetting to any commit, using HEAD as it is"
 fi
