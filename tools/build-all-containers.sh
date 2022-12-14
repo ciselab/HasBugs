@@ -34,7 +34,7 @@ for d in `find $DATA_FOLDER -name "HASBUGS_DOCKERFILE" -type f`; do
     image_name=$(echo "ghcr.io/ciselab/hasbugs/$id:$state-$version")
     start_image_build=$SECONDS
     # Starting Docker build 
-    docker build -f HASBUGS_DOCKERFILE . -t $image_name
+    docker build --quiet -f HASBUGS_DOCKERFILE . -t $image_name
 
     duration=$(($SECONDS - $start_image_build))
     echo "building $image_name took $duration seconds( $(($duration / 60)) minutes)"
