@@ -101,10 +101,10 @@ docker/
    * An executable `get-tested.sh` file to clone the project and setup the tested commit.
 
 
+## Size ad Time Info 
 
+Getting all Datapoints (as of 14-12-2022 21 Datapoints) takes roughly 15-20 minutes on a macbook and takes up 650mb (without git-histories).
 
+A single docker-image takes about 10 minutes to build (depending on repository, see notes in the repositories for more detail) and 3 to 10gb space. 
 
-
-
-
-
+We hence greatly stress to pull the images from the Git Artifact Repository. 
