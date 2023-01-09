@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:haskell/haskell-language-server",
     "repository": "hls",
     "license": "Apache-2.0",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "cdc8f78a9852ed35cbfccc191a0b87f59dc9e271",
     "fixcommit": "0b8c793dfdf0d6adb1d4704343fa512c7646a15a",
     

@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:simonmichael/hledger",
     "repository": "hledger",
     "licence": "GPL-3.0",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "7063eba13ccaffa6118450adb191571851e45cec",
     "fixcommit": "75fc6767a9b326c3eb13f5f8b7bf7dabe65a3979",
     

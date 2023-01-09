@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:koalaman/shellcheck",
     "repository": "shellcheck",
     "license": "GPL3",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "9008a6833bb5996f248dad0bde3c3e05ec22e65d",
     "fixcommit": "fdd02c94c01b81b78e2dada903ea88e29a39befe",
     

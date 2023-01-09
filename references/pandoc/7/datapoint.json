@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:jgm/pandoc",
     "repository": "pandoc",
     "license": "GPLv2",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "3766e03c7d2e4fb0378bb9de1420fa4f6c8107a2",
     "fixcommit": "482a2e50798481f484267bdcfb7b305ea7bd7971",
     

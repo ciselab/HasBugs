@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:purescript/purescript",
     "repository": "purescript",
     "license": "Custom Copyleft",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "3d6b8bf7ffee6c6be85580b7daa765a9b54d0564",
     "fixcommit": "ea118aec3d54a4918825b1e438d3ae4bb9181447",
     

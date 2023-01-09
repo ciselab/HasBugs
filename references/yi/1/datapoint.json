@@ -3,6 +3,7 @@
     "repositoryurl": "git@github.com:yi-editor/yi",
     "repository": "yi",
     "license": "GPL-2.0",
+    "hasbugsversion":"1.0.0",
     "faultcommit": "20fbaea9353e02c353b882c8e83f89c3d88d720f",
     "fixcommit": "909ef8329157fc89850a76e22a3542423ca371ac",
     
