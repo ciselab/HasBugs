@@ -12,8 +12,9 @@
     "testframeworks": ["lsp-test", "tasty", "tasty-expected-failure", "tasty-golden", "tasty-hunit", "tasty-rerun", "tasty-hspec", "hspec", "QuickCheck", "tasty-quickcheck", "ghcide-test-utils"],
 
     "testpatch": true,
-    "description": "When records are punned, there is a reference from pun to field declaration and from pun-name use to pun-declaration, but no transitive one. Meaning refactoring did not propagate to the latter. Solution is a second pass to find indirect pun references and rename those as well.",
-    "categories": ["integration-test"],
+    "testedwith": "tasty-golden",
+    "description": "In Haskell you can pun-records, which means to access field variables in a breviated way. When records are punned, there is a reference from pun to field declaration and from pun-name-use to pun-declaration, but no transitive reference. Meaning refactoring did not propagate to the latter. Solution is a second pass to find indirect pun-references and rename those as well.",
+    "categories": ["integration-test","data-model","refactoring","design decision"],
     
     "relatedissues": ["https://github.com/haskell/haskell-language-server/issues/2970"],
     "relatedprs": ["https://github.com/haskell/haskell-language-server/pull/3013"],

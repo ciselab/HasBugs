@@ -12,8 +12,9 @@
     "testframeworks": ["lsp-test", "tasty", "tasty-expected-failure", "tasty-golden", "tasty-hunit", "tasty-rerun", "tasty-hspec", "hspec", "QuickCheck", "tasty-quickcheck", "ghcide-test-utils"],
 
     "testpatch": true,
-    "description": "Completions did not contain locally defined type families. The fix is to add type family definitions in class declarations.",
-    "categories": ["integration-test"],
+    "testedwith": "tasty",
+    "description": "HLS provides completion suggestions for users. Completions did not contain locally defined type families. The fix is to add type family definitions in class declarations.",
+    "categories": ["integration-test","missed case"],
     
     "relatedissues": [""],
     "relatedprs": ["https://github.com/haskell/haskell-language-server/pull/2987"],

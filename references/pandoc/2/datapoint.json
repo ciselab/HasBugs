@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
-    "description": "When a file was rendered into DOCX with two tables in them, the space between them would be deleted when there was some comment block in-between. However, the comment should be ignored and a paragraph should be inserted anyway for spacing.",
-    "categories": ["integration-test", "golden-test"],
+    "description": "When a file was rendered into DOCX with two tables in them, the space between them would be deleted when there was some comment block in-between.The comment should be ignored and a paragraph should be inserted for spacing.",
+    "categories": ["integration-test", "missed case","feature-collision"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/7724"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/7844"],

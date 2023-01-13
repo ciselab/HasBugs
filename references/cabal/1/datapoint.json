@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "homebrew",
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
-    "description": "'cabal run' termination does not terminate all child processes automatically as well. The solution is to use 'withCreateProcess' rather than 'createProcess' and throw an asynchronous exception from the main thread when a termination is wanted.",
-    "categories": ["system-test"],
+    "description": "Cabal starts multiple processes to build a project. 'cabal run' termination does not terminate all child processes automatically as well. The solution is to use 'withCreateProcess' rather than 'createProcess' and throw an asynchronous exception from the main thread when a termination is wanted.",
+    "categories": ["system-test","os","multi-threading","multi-processing"],
     
     "relatedissues": ["https://github.com/haskell/cabal/issues/7914"],
     "relatedprs": ["https://github.com/haskell/cabal/pull/7921", "https://github.com/haskell/cabal/pull/7757"],

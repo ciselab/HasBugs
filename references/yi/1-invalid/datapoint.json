@@ -9,6 +9,7 @@
     
     "ghcversion": "8.0.2",
     "buildframework": "stack",
+    "testedwith": "",
     "testframeworks": ["tasty", "tasty-hunit", "tasty-quickcheck", "QuickCheck", "tasty-th"],
 
     "testpatch": true,

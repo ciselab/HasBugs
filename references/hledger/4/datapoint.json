@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "shelltestrunner",
     "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
 
     "testpatch": true,
-    "description": "Auto-generated postings without explicit amount needed to be displayed with one. The fix is to generate an amount for auto-postings without one.",
-    "categories": ["integration-test"],
+    "description": "Hledger supports transactions with up to 1 'empty posting' (= no monetary amount). The option 'auto' can add another empty posting, which can result in faulty 2-empty-posting transactions. As a fix, 'auto' generated postings are non-empty by default.",
+    "categories": ["integration-test","feature-collision", "data-inconsistency"],
     
     "relatedissues": ["https://github.com/simonmichael/hledger/issues/1276"],
     "relatedprs": ["https://github.com/simonmichael/hledger/pull/1714"],

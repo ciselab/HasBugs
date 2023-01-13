@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "shelltestrunner",
     "testframeworks": ["doctest", "tasty", "tasty-hunit", "hspec", "yesod-test"],
 
     "testpatch": true,
-    "description": "Incorrect parsing for alias regexes, solved by adding the right 'between' and adding a line for allowing any character to be doubly escaped.",
-    "categories": ["integration-test", "parser"],
+    "description": "HLedger supports aliases for accounts, including support for regex matching. There was incorrect parsing for these alias regexes, solved by adding the right 'between' and adding a line for allowing any character to be doubly escaped.",
+    "categories": ["integration-test", "parser-error", "regex", "character-escaping"],
     
     "relatedissues": ["https://github.com/simonmichael/hledger/issues/982"],
     "relatedprs": ["https://github.com/simonmichael/hledger/pull/1832"],
