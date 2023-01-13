@@ -208,10 +208,12 @@ https://github.com/haskell/cabal/issues/3460
 
 Fix:
 cabal-install/Distribution/Client/ProjectBuilding.hs
+Distribution.Client.ProjectBuilding
 From: 578-578
 To: 578-581 (rebuildTargets), 599-599 (rebuildTargets), 626-633 (rebuildTargets)
 
 cabal-install/Distribution/Client/ProjectPlanning.hs
+Distribution.Client.ProjectPlanning
 From: 625-626, 645-653
 To: 625-625 (getPackageDBContents), 648-655 (createPackageDBIfMissing)
 
