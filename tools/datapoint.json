@@ -1,5 +1,6 @@
 {
     "id": %full_id%,
+    "hasbugsversion":"1.0.0",
     "repositoryurl": %repository_url%,
     "repository": %repository%,
     "licence": %license%,
