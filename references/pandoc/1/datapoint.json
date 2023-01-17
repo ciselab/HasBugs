@@ -12,8 +12,9 @@
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
-    "description": "xref elements can link to figures, but the text inserted for the title of the link would be 'figure_title' rather than the title of the figure. The fix is to add the 'title' attribute to a switch selecting the attribute to use as a title.",
-    "categories": ["integration-test", "golden-test"],
+    "testedwith": "tasty",
+    "description": "Docbook Files support linked figures, which should be convertable to other formats. DocBooks xref elements can link to figures, but the text inserted for the title of the link would be 'figure_title'(default placeholder) rather than the title of the figure. The fix is to add the 'title' attribute and use the title if available.",
+    "categories": ["integration-test","missed case","default value"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/8064"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/8065"],
