@@ -12,8 +12,9 @@
     "testframeworks": ["QuickCheck"],
 
     "testpatch": true,
-    "description": "A Suggestion in changing 'grep' patterns would lead to a false behaviour, if applied as such by the user",
-    "categories": ["logic"],
+    "testedwith": "QuickCheck",
+    "description": "A suggestion in changing 'grep' patterns would lead to a false behaviour, if applied as such by the user. The fix is to be more restrictive when suggesting this replacement, specifically the grep context-options -A and -B.",
+    "categories": ["logic","missing-case","unit-test"],
     
     "relatedissues": ["https://github.com/koalaman/shellcheck/issues/2585"],
     "relatedprs": ["https://github.com/koalaman/shellcheck/pull/2414"],

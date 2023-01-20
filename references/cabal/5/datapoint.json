@@ -11,8 +11,9 @@
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
-    "description": "When initialising a project with the '--no-comments' flag, cabal fields that would normally be commented out still had comments in front of them. Expected behaviour was that comments were not present in front of any fields, commented out or not. Solution is to always remove comments when the '--no-comments' flag is set.",
-    "categories": ["golden-test", "existing-tests", "system-test"],
+    "testedwith": "tasty-golden",
+    "description": "When initialising a project with the '--no-comments' flag, cabal fields that would normally be commented out still had comments in front of them. Expected behaviour is that comments are not present in front of any fields, commented out or not. Solution is to always remove comments when the '--no-comments' flag is set.",
+    "categories": ["logic","refactoring","golden-test", "system-test"],
     
     "relatedissues": ["https://github.com/haskell/cabal/issues/7769"],
     "relatedprs": ["https://github.com/haskell/cabal/pull/7770"],

@@ -12,8 +12,9 @@
     "testframeworks": ["QuickCheck"],
 
     "testpatch": true,
-    "description": "Shellcheck warned for elements within a range ([]) to be repetitive, but that also warned for wishfully repeated element such as variables.",
-    "categories": ["value-checks", "edge-case"],
+    "testedwith": "QuickCheck",
+    "description": "Shellcheck warned for elements within a range ([]) to be repetitive, but that also warned for wishfully repeated element such as variables. The fix is to account for dereferenced elements, such as variables, and not warn in those.",
+    "categories": ["value-checks", "missing-case"],
     
     "relatedissues": ["https://github.com/koalaman/shellcheck/issues/2285", "https://github.com/koalaman/shellcheck/issues/2113"],
     "relatedprs": [""],

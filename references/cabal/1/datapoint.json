@@ -9,7 +9,7 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
-    "testedwith": "homebrew",
+    "testedwith": "cabal-test",
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,

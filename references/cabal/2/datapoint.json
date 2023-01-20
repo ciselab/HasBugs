@@ -8,11 +8,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty-golden",
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
-    "description": "'cabal init -i' does not automatically fill in author name and e-mail anymore. The solution is to add a guess to the prompt.",
-    "categories": ["golden-test", "unit-test"],
+    "description": "Users can use 'cabal init' to bootstrap projects. 'cabal init -i' does not automatically fill in author name and e-mail anymore. The solution is to add a guess (=default) to the prompt.",
+    "categories": ["missing-value","golden-test", "unit-test"],
     
     "relatedissues": ["https://github.com/haskell/cabal/issues/8255"],
     "relatedprs": ["https://github.com/haskell/cabal/pull/8267"],

@@ -12,8 +12,9 @@
     "testframeworks": ["QuickCheck"],
 
     "testpatch": true,
-    "description": "The @ Character would not be recognized as valid in function names",
-    "categories": ["Edge-Cases", "Parsing"],
+    "testedwith": "QuickCheck",
+    "description": "ShellCheck performs many checks around function-declaration. When declaring a function,the @ Character would not be recognized as valid in (-front of) function names. The fix is to adjust the parser, to consider it a valid function name.",
+    "categories": ["missing-case", "parsing","unit-test"],
     
     "relatedissues": ["https://github.com/koalaman/shellcheck/issues/949", "https://github.com/koalaman/shellcheck/issues/909"],
     "relatedprs": ["https://github.com/koalaman/shellcheck/pull/1302"],

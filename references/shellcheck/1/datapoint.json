@@ -12,8 +12,9 @@
     "testframeworks": ["QuickCheck"],
 
     "testpatch": true,
-    "description": "ShellCheck warned for a non-assigned variable due to nesting and a pattern matcch, despite correct snytax.",
-    "categories": ["parsing"],
+    "testedwith": "QuickCheck",
+    "description": "ShellCheck warned for a non-assigned variable due to nesting and a pattern match, despite correct snytax. The fix is to filter for sub-processes.",
+    "categories": ["missing-check", "unit-test"],
     
     "relatedissues": ["https://github.com/koalaman/shellcheck/issues/1759"],
     "relatedprs": ["https://github.com/koalaman/shellcheck/pull/1779"],

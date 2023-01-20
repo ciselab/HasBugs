@@ -12,7 +12,8 @@
     "testframeworks": ["hspec", "hunit", "quickcheck"],
 
     "testpatch": true,
-    "description": "When users asked for possible values in Type Holes, the suggested values where (sometimes) duplicated",
+    "testedwith": "hspec",
+    "description": "Purescript supports typed holes, which users can utilize to get type-correct replacements for the typed holes. When users asked for possible values in Type Holes, the suggested values where (sometimes) duplicated",
     "categories": ["desugaring-issue", "integration"],
     
     "relatedissues": ["https://github.com/purescript/purescript/issues/4373"],

@@ -12,8 +12,9 @@
     "testframeworks": ["QuickCheck"],
 
     "testpatch": true,
-    "description": "The used regex did not account for all end-of-line characters",
-    "categories": ["regex", "special characters"],
+    "testedwith": "QuickCheck",
+    "description": "Shellcheck can warn for the usage of escape-characters in echo-commands. The used regex did not account for all end-of-line characters, missing out potential warnings. The fix is to expand the regex.",
+    "categories": ["regex","escaping","unit-test"],
     
     "relatedissues": ["https://github.com/koalaman/shellcheck/issues/2476"],
     "relatedprs": ["https://github.com/koalaman/shellcheck/pull/2543"],

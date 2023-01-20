@@ -11,8 +11,9 @@
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
-    "description": "'cabal HEAD' is confused by trailing whitespaces in 'default-language' tags. The solution is to fix parsing from 'some anyChar' to 'munch1 isAlphaNum'.",
-    "categories": ["system-test"],
+    "testedwith": "cabal-test",
+    "description": "Cabal provides and parses it's own configuration file. The used method 'cabal HEAD' is confused by trailing whitespaces in 'default-language' tags. The solution is to fix parsing by changing 'some anyChar' to 'munch1 isAlphaNum'. This way, only characters are parsed into a language.",
+    "categories": ["parsing","whitespace","system-test"],
     
     "relatedissues": ["https://github.com/haskell/cabal/issues/8507"],
     "relatedprs": ["https://github.com/haskell/cabal/pull/8508"],

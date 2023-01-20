@@ -11,8 +11,9 @@
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
+    "testedwith": "cabal-test",
     "description": "Multiple concurrent builds would sometimes give an error similar to 'ghc-pkg: cannot create: /home/edsko/path/to/main-package/dist-newstyle/packagedb/ghc-7.10.3 already exists' because packagedbs would be made at the same time. The solution is to initialise packagedbs at the start of the build process rather than when needed.",
-    "categories": ["system-test"],
+    "categories": ["concurrency","file-management","system-test"],
     
     "relatedissues": ["https://github.com/haskell/cabal/issues/3460"],
     "relatedprs": ["https://github.com/haskell/cabal/pull/3509"],
