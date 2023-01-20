@@ -21,26 +21,50 @@
     
     "faultlocations" : [
     {
-        "startline": 5,
-        "endline": 15,
-        "file" : "./project/.../Module.hs",
-        "module" : "Fully.Qualified.Module",
-        "function": "main"
+        "startline": 2386,
+        "endline": 2386,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseTableRow"
     },{
-        "startline": 25,
-        "endline": 35,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "helper"
+        "startline": 2392,
+        "endline": 2392,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseTableCell"
+    },{
+        "startline": 2414,
+        "endline": 2439,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseMultiCell"
     }
     ],
     "fixlocations" : [
     {
-        "startline": 5,
-        "endline": 20,
-        "file": "./project/.../Module.hs",
-        "module": "Fully.Qualified.Module",
-        "function": "main"
+        "startline": 2386,
+        "endline": 2388,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseTableRow"
+    },{
+        "startline": 2394,
+        "endline": 2398,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseTableCell"
+    },{
+        "startline": 2402,
+        "endline": 2405,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "parseTableCell"
+    },{
+        "startline": 2424,
+        "endline": 2459,
+        "file" : "src/Text/Pandoc/Readers/LaTeX.hs",
+        "module" : "Text.Pandoc.Readers.LaTeX",
+        "function": "multicolumnCell"
     }
     ]
 }
