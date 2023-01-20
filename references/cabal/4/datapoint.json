@@ -1,0 +1,104 @@
+{
+    "id": "cabal-4",
+    "repositoryurl": "git@github.com:haskell/cabal",
+    "repository": "cabal",
+    "license": "BSD-3",
+    "faultcommit": "aabe56252fcceb58f2f3f80451bba7ca13109266",
+    "fixcommit": "84884bbc21a63b61d698138f549baae152efd878",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
+
+    "testpatch": true,
+    "description": "'--dry-run' did not actually dry-run for commands 'v2-configure', 'v2-freeze', 'v2-run', and 'v2-exec'. Instead, the dry-run flag was ignored and the commands did perform a few actions. The fix is to add if-expressions where needed in the commands' code to perform the dry-run as expected.",
+    "categories": ["system-test", "golden-test"],
+    
+    "relatedissues": ["https://github.com/haskell/cabal/issues/7379"],
+    "relatedprs": ["https://github.com/haskell/cabal/pull/7407"],
+    
+    "faultlocations" : [
+    {
+        "startline": 92,
+        "endline": 94,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "configureAction"
+    },{
+        "startline": 104,
+        "endline": 104,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "configureAction'"
+    },{
+        "startline": 109,
+        "endline": 121,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "configureAction'"
+    },{
+        "startline": 188,
+        "endline": 188,
+        "file" : "cabal-install/src/Distribution/Client/CmdExec.hs",
+        "module" : "Distribution.Client.CmdExec",
+        "function": "execAction"
+    },{
+        "startline": 119,
+        "endline": 121,
+        "file" : "cabal-install/src/Distribution/Client/CmdFreeze.hs",
+        "module" : "Distribution.Client.CmdFreeze",
+        "function": "freezeAction"
+    },{
+        "startline": 286,
+        "endline": 294,
+        "file" : "cabal-install/src/Distribution/Client/CmdRun.hs",
+        "module" : "Distribution.Client.CmdRun",
+        "function": "runAction"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 92,
+        "endline": 99,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "configureAction"
+    },{
+        "startline": 113,
+        "endline": 131,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "configureAction'"
+    },{
+        "startline": 137,
+        "endline": 142,
+        "file" : "cabal-install/src/Distribution/Client/CmdConfigure.hs",
+        "module" : "Distribution.Client.CmdConfigure",
+        "function": "shouldNotWriteFile"
+    },{
+        "startline": 190,
+        "endline": 195,
+        "file" : "cabal-install/src/Distribution/Client/CmdExec.hs",
+        "module" : "Distribution.Client.CmdExec",
+        "function": "execAction"
+    },{
+        "startline": 109,
+        "endline": 110,
+        "file" : "cabal-install/src/Distribution/Client/CmdFreeze.hs",
+        "module" : "Distribution.Client.CmdFreeze",
+        "function": "freezeAction"
+    },{
+        "startline": 120,
+        "endline": 128,
+        "file" : "cabal-install/src/Distribution/Client/CmdFreeze.hs",
+        "module" : "Distribution.Client.CmdFreeze",
+        "function": "freezeAction"
+    },{
+        "startline": 286,
+        "endline": 300,
+        "file" : "cabal-install/src/Distribution/Client/CmdRun.hs",
+        "module" : "Distribution.Client.CmdRun",
+        "function": "runAction"
+    }
+    ]
+}

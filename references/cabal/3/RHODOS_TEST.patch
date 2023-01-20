@@ -1,0 +1,107 @@
+From 52cc82d430e6b9efa4024138119cc26b787d47ad Mon Sep 17 00:00:00 2001
+From: ffaf1 <fa-ml@ariis.it>
+Date: Thu, 6 Oct 2022 05:55:20 +0200
+Subject: [PATCH] Use munch1 to parse Language (#8508)
+
+* Add regression test for #8507
+
+* Use munch1 to parse Language
+
+If you use `some anyChar` trailing whitespace will be
+part of the parsed value, see #8507.
+
+Co-authored-by: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+---
+ Cabal-syntax/src/Language/Haskell/Extension.hs     |  2 +-
+ .../PackageTests/Regression/T8507/Foo.hs           |  4 ++++
+ .../PackageTests/Regression/T8507/cabal.out        |  8 ++++++++
+ .../PackageTests/Regression/T8507/cabal.project    |  2 ++
+ .../PackageTests/Regression/T8507/cabal.test.hs    |  6 ++++++
+ .../PackageTests/Regression/T8507/pkg.cabal        | 14 ++++++++++++++
+ fix-whitespace.yaml                                |  1 +
+ 7 files changed, 36 insertions(+), 1 deletion(-)
+ create mode 100644 cabal-testsuite/PackageTests/Regression/T8507/Foo.hs
+ create mode 100644 cabal-testsuite/PackageTests/Regression/T8507/cabal.out
+ create mode 100644 cabal-testsuite/PackageTests/Regression/T8507/cabal.project
+ create mode 100644 cabal-testsuite/PackageTests/Regression/T8507/cabal.test.hs
+ create mode 100644 cabal-testsuite/PackageTests/Regression/T8507/pkg.cabal
+
+diff --git a/cabal-testsuite/PackageTests/Regression/T8507/Foo.hs b/cabal-testsuite/PackageTests/Regression/T8507/Foo.hs
+new file mode 100644
+index 000000000..614d2790c
+--- /dev/null
++++ b/cabal-testsuite/PackageTests/Regression/T8507/Foo.hs
+@@ -0,0 +1,4 @@
++module Foo where
++
++foo :: a
++foo = undefined
+diff --git a/cabal-testsuite/PackageTests/Regression/T8507/cabal.out b/cabal-testsuite/PackageTests/Regression/T8507/cabal.out
+new file mode 100644
+index 000000000..0c53c8b3d
+--- /dev/null
++++ b/cabal-testsuite/PackageTests/Regression/T8507/cabal.out
+@@ -0,0 +1,8 @@
++# cabal v2-build
++Resolving dependencies...
++Build profile: -w ghc-<GHCVER> -O1
++In order, the following will be built:
++ - pkg-0 (lib) (first run)
++Configuring library for pkg-0..
++Preprocessing library for pkg-0..
++Building library for pkg-0..
+diff --git a/cabal-testsuite/PackageTests/Regression/T8507/cabal.project b/cabal-testsuite/PackageTests/Regression/T8507/cabal.project
+new file mode 100644
+index 000000000..8834d0440
+--- /dev/null
++++ b/cabal-testsuite/PackageTests/Regression/T8507/cabal.project
+@@ -0,0 +1,2 @@
++packages:
++  ./
+diff --git a/cabal-testsuite/PackageTests/Regression/T8507/cabal.test.hs b/cabal-testsuite/PackageTests/Regression/T8507/cabal.test.hs
+new file mode 100644
+index 000000000..58266256b
+--- /dev/null
++++ b/cabal-testsuite/PackageTests/Regression/T8507/cabal.test.hs
+@@ -0,0 +1,6 @@
++import Test.Cabal.Prelude
++
++-- Issue #8507: trailing space in `default-language` should not make
++-- `cabal build` complain.
++main = cabalTest $ cabal "v2-build" ["all"]
++
+diff --git a/cabal-testsuite/PackageTests/Regression/T8507/pkg.cabal b/cabal-testsuite/PackageTests/Regression/T8507/pkg.cabal
+new file mode 100644
+index 000000000..80fb8e284
+--- /dev/null
++++ b/cabal-testsuite/PackageTests/Regression/T8507/pkg.cabal
+@@ -0,0 +1,14 @@
++cabal-version: 3.0
++name: pkg
++synopsis: synopsis
++description: description
++version: 0
++category: example
++maintainer: none@example.com
++license: GPL-3.0-or-later
++
++library
++  exposed-modules: Foo,
++  build-depends: base == 4.*
++  default-language: Haskell2010    
++    -- Note whitespace after “Haskell 2010”.
+diff --git a/fix-whitespace.yaml b/fix-whitespace.yaml
+index bbec61f15..d96e84188 100644
+--- a/fix-whitespace.yaml
++++ b/fix-whitespace.yaml
+@@ -92,6 +92,7 @@ excluded-files:
+   - Cabal-syntax/src/Distribution/Fields/Lexer.hs
+   - Cabal-tests/tests/ParserTests/warnings/tab.cabal
+   - Cabal-tests/tests/ParserTests/warnings/utf8.cabal
++  - cabal-testsuite/PackageTests/Regression/T8507/pkg.cabal
+ 
+   # These also contain tabs that affect the golden value:
+   # Could be removed from exceptions, but then the tab warning
+-- 
+2.25.1
+

@@ -1,0 +1,50 @@
+{
+    "id": "cabal-2",
+    "repositoryurl": "git@github.com:haskell/cabal",
+    "repository": "cabal",
+    "license": "BSD-3",
+    "faultcommit": "2e9af5bb241f187bedf149d2ef272570384e5991",
+    "fixcommit": "1b8bf8ccb58c131efcbb3925bcbb5bd4c14adc03",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
+
+    "testpatch": true,
+    "description": "'cabal init -i' does not automatically fill in author name and e-mail anymore. The solution is to add a guess to the prompt.",
+    "categories": ["golden-test", "unit-test"],
+    
+    "relatedissues": ["https://github.com/haskell/cabal/issues/8255"],
+    "relatedprs": ["https://github.com/haskell/cabal/pull/8267"],
+    
+    "faultlocations" : [
+    {
+        "startline": 358,
+        "endline": 359,
+        "file" : "cabal-install/src/Distribution/Client/Init/Interactive/Command.hs",
+        "module" : "Distribution.Client.Init.Interactive.Command",
+        "function": "authorPrompt"
+    },{
+        "startline": 362,
+        "endline": 363,
+        "file" : "cabal-install/src/Distribution/Client/Init/Interactive/Command.hs",
+        "module" : "Distribution.Client.Init.Interactive.Command",
+        "function": "emailPrompt"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 359,
+        "endline": 361,
+        "file" : "cabal-install/src/Distribution/Client/Init/Interactive/Command.hs",
+        "module" : "Distribution.Client.Init.Interactive.Command",
+        "function": "authorPrompt"
+    },{
+        "startline": 364,
+        "endline": 366,
+        "file" : "cabal-install/src/Distribution/Client/Init/Interactive/Command.hs",
+        "module" : "Distribution.Client.Init.Interactive.Command",
+        "function": "emailPrompt"
+    }
+    ]
+}
