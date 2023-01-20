@@ -4,5 +4,5 @@ WORKDIR /build
 COPY . .
 
 RUN stack --stack-yaml=stack-lts16.yaml setup
-RUN stack --stack-yaml=stack-lts16.yaml test plugins/hls-rename-plugin
+ENTRYPOINT ["stack", "--stack-yaml=stack-lts16.yaml","test","plugins/hls-rename-plugin"]
 

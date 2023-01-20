@@ -6,4 +6,4 @@ COPY . .
 RUN stack setup
 RUN stack build 
 
-RUN ["stack","test"]
+ENTRYPOINT ["stack","test"]
