@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
-    "description": "Empty table cells were filtered out when reading LaTeX tables without handling multirows and multicols properly. By adding code for recognising multicols/rows correctly, empty cells can now be filtered without shifting other cells out of place.",
-    "categories": ["unit-test"],
+    "description": "Empty table cells were filtered out when reading LaTeX tables without handling multirows and multicols properly. By adding code for recognising multicols and rows correctly, empty cells can now be filtered without shifting other cells out of place.",
+    "categories": ["parsing","data-loss","unit-test"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/6681"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/6608"],

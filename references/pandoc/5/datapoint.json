@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
     "description": "When a code-block starts with a period, ROFF MS interpreted this as a command rather than a part of the code-block. The solution is to escape the periods.",
-    "categories": ["integration-test", "close-to-unit-test"],
+    "categories": ["formatting","escaping","integration-test", "close-to-unit-test"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/6505"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/6513"],

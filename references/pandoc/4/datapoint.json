@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty-golden",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
     "description": "Formatting in code blocks is not allowed by pandoc, causing bold code to be possible but a code block with parts bold in it impossible for LaTeX. The fix is to make sure formatting of a code block happens outside of the codeblock.",
-    "categories": ["integration-test"],
+    "categories": ["formatting","missing-check","integration-test"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/7525"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/8129"],

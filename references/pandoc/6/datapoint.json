@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
-    "description": "Inline Markdown code-blocks had a slight parsing/priority problem. Code blocks with '(1)' in them would be wrongly delimited.",
-    "categories": ["unit-test"],
+    "description": "Inline Markdown code-blocks had a slight parsing/priority problem. Code blocks with '(1)' in them would be wrongly delimited. The fix is to reorder parsing steps to account for lists inner-nested.",
+    "categories": ["parsing","unit-test"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/6284"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/6289"],

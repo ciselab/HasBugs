@@ -9,11 +9,12 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "testedwith": "tasty-golden",
     "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
 
     "testpatch": true,
-    "description": "When multiple paragraphs were present under a single list item, DOCXs would annotate each paragraph with the list item number, but should instead only annotate the first. Fix is to add a marker that is set when the first annotation is done and checked on every subsequent annotation.",
-    "categories": ["integration-test", "golden-test"],
+    "description": "When multiple paragraphs were present under a single list item, DOCXs would annotate each paragraph with the list item number, but should instead only annotate the first. Fix is adding a marker that is set when the first annotation is done and checked on every subsequent annotation.",
+    "categories": ["formatting","integration-test", "golden-test"],
     
     "relatedissues": ["https://github.com/jgm/pandoc/issues/7689"],
     "relatedprs": ["https://github.com/jgm/pandoc/pull/7822"],
