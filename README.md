@@ -20,7 +20,8 @@ For every project, we provide
 
 - The buggy version
 - The fixed version
-- Iff the buggy version does not have a failing test, a git-patch to create a buggy-but-tested version
+- The tested (and failing) version
+- A git-patch of the test
 - A datapoint for analysis (see below)
 
 A single datapoint can contain the following attributes (required attributes are marked with *, but these stars are not in the actual json!): 

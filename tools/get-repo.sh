@@ -103,7 +103,7 @@ elif [[ "$target" == "tested" && "$patch_test" ]]; then
 
 	echo "Patching with patch file: ${patch_file}"
 	cp "${origin}/${patch_file}" ./
-	git apply --quiet "${patch_file}"
+	git apply "${patch_file}"
 elif [[ "$target" == "tested" ]]; then
 	echo "Resetting to fixed commit (with test?)"
 	git reset --hard
