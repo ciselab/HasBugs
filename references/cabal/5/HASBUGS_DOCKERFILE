@@ -1,4 +1,4 @@
-FROM haskell:9.2.4
+FROM haskell:8.10.7
 
 LABEL maintainer="L.H.Applis@tu-delft.nl"
 LABEL org.opencontainers.image.source https://github.com/ciselab/hasbugs
@@ -8,7 +8,8 @@ LABEL url="https://github.com/ciselab/hasbugs/"
 WORKDIR /build
 COPY . .
 
-RUN stack setup
-RUN stack build
+RUN cabal update
+RUN cabal v2-build cabal-install
 
-ENTRYPOINT ["stack","test","plugins/hls-module-name-plugin"]
+RUN cabal test cabal-install:unit-tests --test-option='-p "golden"' --test-option='-p '
+

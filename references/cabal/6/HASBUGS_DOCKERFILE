@@ -1,4 +1,4 @@
-FROM haskell:9.2.4
+FROM haskell:7.10.3
 
 LABEL maintainer="L.H.Applis@tu-delft.nl"
 LABEL org.opencontainers.image.source https://github.com/ciselab/hasbugs
@@ -8,7 +8,6 @@ LABEL url="https://github.com/ciselab/hasbugs/"
 WORKDIR /build
 COPY . .
 
-RUN stack setup
 RUN stack build
+RUN stack test
 
-ENTRYPOINT ["stack","test","plugins/hls-module-name-plugin"]

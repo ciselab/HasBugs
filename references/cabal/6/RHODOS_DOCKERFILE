@@ -1,8 +1,0 @@
-FROM haskell:7.10.3
-
-WORKDIR /build
-COPY . .
-
-RUN stack build
-RUN stack test
-

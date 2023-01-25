@@ -1,5 +1,10 @@
 FROM haskell:8.0.2
 
+LABEL maintainer="L.H.Applis@tu-delft.nl"
+LABEL org.opencontainers.image.source https://github.com/ciselab/hasbugs
+LABEL vcs="https://github.com/ciselab/hasbugs/"
+LABEL url="https://github.com/ciselab/hasbugs/"
+
 CMD ["/bin/sh"]
 
 WORKDIR /build
