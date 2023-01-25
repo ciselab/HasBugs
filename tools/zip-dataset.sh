@@ -35,7 +35,7 @@ echo "Finished Copying Datapoints"
 #TODO: Copy README if exists 
 #TODO: Copy dataset.json if nearby 
 
-echo "Zipping data in ${DATA_FOLDER} into ${ZIP_NAME}"
-tar -czf "${ZIP_NAME}" "${DATA_FOLDER}"
+# echo "Zipping data in ${DATA_FOLDER} into ${ZIP_NAME}"
+# tar -czf "${ZIP_NAME}" "${DATA_FOLDER}"
 
-echo "Finished Zipping Data, script took total of $(($SECONDS / 60)) minutes ($SECONDS seconds)"
+# echo "Finished Zipping Data, script took total of $(($SECONDS / 60)) minutes ($SECONDS seconds)"
