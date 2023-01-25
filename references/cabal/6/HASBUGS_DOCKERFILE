@@ -9,5 +9,5 @@ WORKDIR /build
 COPY . .
 
 RUN stack build
-RUN stack test
+ENTRYPOINT ["stack","test"]
 

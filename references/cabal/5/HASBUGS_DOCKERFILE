@@ -11,5 +11,4 @@ COPY . .
 RUN cabal update
 RUN cabal v2-build cabal-install
 
-RUN cabal test cabal-install:unit-tests --test-option='-p "golden"' --test-option='-p '
-
+ENTRYPOINT ["cabal","test","cabal-install:unit-tests","--test-option='-p \"golden\"'","--test-option='-p '"]

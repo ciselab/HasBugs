@@ -11,5 +11,4 @@ COPY . .
 RUN cabal update
 RUN cabal v2-build cabal-install:unit-tests
 
-RUN cabal test cabal-install:unit-tests --test-option='-p $0 ~ /Check top level getter functions/ || $0 ~ /generators/ || $0 ~ /golden/ || $0 ~ /createProject tests/'
-
+ENTRYPOINT ["cabal","test","cabal-install:unit-tests", "--test-option='-p $0 ~ /Check top level getter functions/ || $0 ~ /generators/ || $0 ~ /golden/ || $0 ~ /createProject tests/'"]
