@@ -1,4 +1,4 @@
-# HasBugs - Haskell Bugs for you and me 
+# HasBugs - Handpicked Haskell Bugs
 
 We try to provide a fresh dataset in the fashion of [Defects4J](https://github.com/rjust/defects4j) to evaluate tasks such as fault localization, program repair and test generation.
 
