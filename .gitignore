@@ -1,9 +1,0 @@
-.idea
-data/*
-ignored
-
-*.swp
-*.kate-swp
-
-#For the Mac Users out there
-.DS_Store
