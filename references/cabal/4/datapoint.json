@@ -7,6 +7,7 @@
     "fixcommit": "84884bbc21a63b61d698138f549baae152efd878",
     
     "ghcversion": "8.10.7",
+    "hasbugsversion":"1.0.0",
     "buildframework": "stack",
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 

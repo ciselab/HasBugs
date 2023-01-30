@@ -8,6 +8,7 @@
     
     "ghcversion": "8.10.7",
     "buildframework": "stack",
+    "hasbugsversion":"1.0.0",
     "testframeworks": ["QuickCheck", "tasty", "tasty-quickcheck", "Cabal-QuickCheck", "tasty-hunit", "tasty-golden", "tasty-expected-failure"],
 
     "testpatch": true,
