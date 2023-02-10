@@ -11,4 +11,7 @@ COPY . .
 RUN cabal update
 RUN cabal v2-build all
 
-ENTRYPOINT ["dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-testsuite-3/build/cabal-tests/cabal-tests" "--with-cabal" "dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-install-3.7.0.0/x/cabal/build/cabal/cabal"]
+# Note: This entrypoint is hardcoded for this docker. 
+# If you want to run things yourself, you must rebuild the command for your particular system, as architecture and the like are different.
+
+ENTRYPOINT ["dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-testsuite-3/build/cabal-tests/cabal-tests","--with-cabal","dist-newstyle/build/x86_64-linux/ghc-8.10.7/cabal-install-3.7.0.0/x/cabal/build/cabal/cabal"]

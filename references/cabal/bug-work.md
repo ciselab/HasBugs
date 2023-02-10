@@ -1,5 +1,7 @@
 https://github.com/haskell/cabal/issues?q=is%3Aissue+is%3Aclosed+linked%3Apr+label%3A%22type%3A+bug%22
 
+**Very Important**: For the Cabal tests to run, they need some cached data! This means, you need to pull the data *with history!* Otherwise, you have all package tests failing, which is ok if your test is not a package test.
+
 ### Bug 1: (TEST FAILS SUCCESSFULLY))
 'cabal run' termination does not terminate all child processes automatically as well. The solution is to use 'withCreateProcess' rather than 'createProcess' and throw an asynchronous exception from the main thread when a termination is wanted.
 
