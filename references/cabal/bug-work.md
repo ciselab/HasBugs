@@ -239,6 +239,48 @@ GHC: 8.10.7
 Categories: 
 system-test
 
+Issue with Dockerfile: 
+```
+FROM haskell:7.10.3
+
+LABEL maintainer="L.H.Applis@tu-delft.nl"
+LABEL org.opencontainers.image.source https://github.com/ciselab/hasbugs
+LABEL vcs="https://github.com/ciselab/hasbugs/"
+LABEL url="https://github.com/ciselab/hasbugs/"
+
+
+RUN echo "deb [check-valid-until=no] http://cdn-fastly.deb.debian.org/debian/ jessie main" >> /etc/apt/sources.list
+RUN echo "deb-src http://cdn-fastly.deb.debian.org/debian/ jessie main" >> /etc/apt/sources.list
+RUN echo "deb [check-valid-until=no] http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list
+RUN echo "deb-src http://security.debian.org/ jessie/updates main" >> /etc/apt/sources.list
+RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+RUN echo "deb-src http://archive.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+
+
+RUN apt-get update
+RUN apt-get install apt-transport-https ca-certificates wget
+
+WORKDIR /build
+COPY . .
+
+WORKDIR /build/Cabal
+
+RUN cabal install 
+
+WORKDIR /build/cabal-install
+
+RUN cabal update
+RUN bash bootstrap.sh
+RUN cabal update
+RUN cabal configure
+RUN cabal install
+
+ENTRYPOINT ["cabal","test"]
+```
+
+Here only the cabal bootstrap wants some wget or curl.
+This is getting me quite far, but the issue is that the old jessie container does not have an apt https thing, but the jessie backport repositories force https. So I'd need to manually move the package in, somehow, but I cannot curl or wget it as they are not installed.
+
 ### Bug 7:
 
 
