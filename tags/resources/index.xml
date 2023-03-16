@@ -1,2 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Resources on HasBugs</title><link>https://ciselab.github.io/HasBugs/tags/resources/</link><description>Recent content in Resources on HasBugs</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 30 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ciselab.github.io/HasBugs/tags/resources/index.xml" rel="self" type="application/rss+xml"/><item><title>Tutorial</title><link>https://ciselab.github.io/HasBugs/tutorial/</link><pubDate>Fri, 30 Dec 2022 00:00:00 +0000</pubDate><guid>https://ciselab.github.io/HasBugs/tutorial/</guid><description>Thanks for having a look. Depending on what you want to do, we have different formats provided:
-A Repository for docker images Datapoints as JSON &amp;ldquo;manifested&amp;rdquo; Haskell Projects An important point is our naming: We have the bugs in different versions - buggy, tested &amp;amp; fixed.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resources on HasBugs</title>
+    <link>https://ciselab.github.io/HasBugs/tags/resources/</link>
+    <description>Recent content in Resources on HasBugs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 30 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://ciselab.github.io/HasBugs/tags/resources/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tutorial</title>
+      <link>https://ciselab.github.io/HasBugs/tutorial/</link>
+      <pubDate>Fri, 30 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://ciselab.github.io/HasBugs/tutorial/</guid>
+      <description>Thanks for having a look. Depending on what you want to do, we have different formats provided:
+A Repository for docker images Datapoints as JSON &amp;ldquo;manifested&amp;rdquo; Haskell Projects An important point is our naming: We have the bugs in different versions - buggy, tested &amp;amp; fixed.</description>
+    </item>
+    
+  </channel>
+</rss>
