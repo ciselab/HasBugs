@@ -210,7 +210,6 @@ index 8f0171a2e..5ebcf8971 100644
        Nothing -> return ()
  
 +    action procHandle
-+
      -- wait for the program to terminate
      exitcode <- waitForProcess procHandle
      out <- wait sync
