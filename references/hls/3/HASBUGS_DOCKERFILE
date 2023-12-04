@@ -9,6 +9,6 @@ WORKDIR /build
 COPY . .
 
 RUN cabal update
-RUN cabal build ghcide
+RUN cabal build all
 
-ENTRYPOINT ["cabal","test","ghcide"]
+ENTRYPOINT ["cabal","test","func-test"]
