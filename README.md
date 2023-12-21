@@ -88,4 +88,19 @@ To add a new datapoint, run `setup.sh` and the accompanying tools in `./tools`. 
 - Compatible with GHC >=8.10
 - Projects run with a single `make test`, `cabal test` or `stack test` 
 - buggy version newer than 2018
-- bug and fix aknowledged as such by the maintainer(s) through Github Issues / PRs 
+- bug and fix aknowledged as such by the maintainer(s) through Github Issues / PRs
+
+## Citation 
+
+If you use Datapoints, or just critizise this work, please use 
+
+```bibtex
+@inproceedings{applis2023hasbugs,
+	title={HasBugs-Handpicked Haskell Bugs},
+	author={Applis, Leonhard and Panichella, Annibale},
+	booktitle={2023 IEEE/ACM 20th International Conference on Mining Software Repositories (MSR)},
+	pages={223--227},
+	year={2023},
+	organization={IEEE}
+}
+```
