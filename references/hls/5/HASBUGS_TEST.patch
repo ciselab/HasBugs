@@ -1,0 +1,51 @@
+From 5eeb1d36191e086cc3301f41f56eb6d4aa0a0006 Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Thu, 8 Feb 2024 12:03:02 +0100
+Subject: [PATCH 1/1] Failing-Test-Upgrade
+
+---
+ hls-plugin-api/src/Ide/PluginUtils.hs      | 15 +--------------
+ hls-plugin-api/test/Ide/PluginUtilsTest.hs |  1 +
+ 2 files changed, 2 insertions(+), 14 deletions(-)
+
+diff --git a/hls-plugin-api/src/Ide/PluginUtils.hs b/hls-plugin-api/src/Ide/PluginUtils.hs
+index 817c96ed..2813132f 100644
+--- a/hls-plugin-api/src/Ide/PluginUtils.hs
++++ b/hls-plugin-api/src/Ide/PluginUtils.hs
+@@ -236,20 +236,7 @@ usePropertyLsp kn pId p = do
+ extractTextInRange :: Range -> T.Text -> T.Text
+ extractTextInRange (Range (Position sl sc) (Position el ec)) s = newS
+   where
+-    focusLines =
+-      T.lines s
+-        -- NOTE: Always append an empty line to the end to ensure there are
+-        -- sufficient lines to take from.
+-        --
+-        -- There is a situation that when the end position is placed at the line
+-        -- below the last line, if we simply do `drop` and then `take`, there
+-        -- will be `el - sl` lines left, not `el - sl + 1` lines. And then
+-        -- the last line of code will be emptied unexpectedly.
+-        --
+-        -- For details, see https://github.com/haskell/haskell-language-server/issues/3847
+-        & (++ [""])
+-        & drop (fromIntegral sl)
+-        & take (fromIntegral $ el - sl + 1)
++    focusLines = take (fromIntegral $ el - sl + 1) $ drop (fromIntegral sl) $ T.lines s
+     -- NOTE: We have to trim the last line first to handle the single-line case
+     newS =
+       focusLines
+diff --git a/hls-plugin-api/test/Ide/PluginUtilsTest.hs b/hls-plugin-api/test/Ide/PluginUtilsTest.hs
+index a4f16a44..c80a29fa 100644
+--- a/hls-plugin-api/test/Ide/PluginUtilsTest.hs
++++ b/hls-plugin-api/test/Ide/PluginUtilsTest.hs
+@@ -95,6 +95,7 @@ extractTextInRangeTest = testGroup "extractTextInRange"
+                 ]
+         emptySrc = "\n"
+ 
++
+ genRange :: Gen Range
+ genRange = oneof [ genRangeInline, genRangeMultiline ]
+ 
+-- 
+2.25.1
+

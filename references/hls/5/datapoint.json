@@ -1,0 +1,38 @@
+{
+    "id": "hls-5",
+    "repositoryurl": "https://github.com/haskell/haskell-language-server.git",
+    "repository": "hls",
+    "license": "Apache-2.0",
+    "faultcommit": "548ca17cc73546407ac6e2cd26068a12f2d56af7",
+    "fixcommit": "afac9b1872be33ab8680850be7446bed0053af3a",
+    
+    "ghcversion": "9.6.3",
+    "buildframework": "stack",
+    "testframeworks": ["lsp-test", "tasty", "tasty-expected-failure", "tasty-golden", "tasty-hunit", "tasty-rerun", "tasty-hspec", "hspec", "QuickCheck", "tasty-quickcheck", "ghcide-test-utils"],
+
+    "testpatch": true,
+    "description": "Many HSL Plugins deal with text-alternation. One ('stylish-Haskell'), that does formatting on a file level, removes the last line of the file. The fix is to guard the formatting against different types of file-endings.",
+    "categories": ["unit-test", "whitespace", "string-manipulation", "missing-check"],
+    
+    "relatedissues": ["https://github.com/haskell/haskell-language-server/issues/3847"],
+    "relatedprs": ["https://github.com/haskell/haskell-language-server/pull/3854"],
+    
+    "faultlocations" : [
+        {
+            "startline": 239,
+            "endline": 239,
+            "file" : "hls-plugin-api/src/Ide/PluginUtils.hs",
+            "module" : "Ide.PluginUtils",
+            "function": "extractTextInRange"
+        }
+        ],
+        "fixlocations" : [
+        {
+            "startline": 239,
+            "endline": 252,
+            "file" : "hls-plugin-api/src/Ide/PluginUtils.hs",
+            "module" : "Ide.PluginUtils",
+            "function": "extractTextInRange"
+        }
+        ]
+}
