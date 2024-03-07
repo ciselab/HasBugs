@@ -1,0 +1,53 @@
+{
+    "id": "pandoc-8",
+    "repositoryurl": "https://github.com/jgm/pandoc.git",
+    "repository": "pandoc",
+    "license": "GPLv2",
+    "faultcommit": "aa9577074357c7938c5a4a7e820bd12c90c0d32b",
+    "fixcommit": "3be253fb90deb8ca746156a3b281e5983fc6e8cf",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "stack",
+    "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
+
+    "testpatch": true,
+    "description": "Pandoc is able to convert footnotes from the markdown-based 'Big-Note' to LaTeX. However, it produced a crash for multi-line footnotes when they were in other modulation (e.g., italics). The fix consists of re-ordering the elements and their styles so that their conversion does not clash.",
+    "categories": ["integration-test", "missed case", "data-representation"],
+    
+    "relatedissues": ["https://github.com/jgm/pandoc/issues/8982"],
+    "relatedprs": ["https://github.com/jgm/pandoc/pull/9168"],
+    
+    "faultlocations" : [
+        {
+            "startline": 71,
+            "endline": 71,
+            "file": "src/Text/Pandoc/Writers/LaTeX.hs",
+            "module": "Text.Pandoc.Writers.LaTeX",
+            "function": "writeLaTeX "
+        }
+    ],
+    "fixlocations" : [
+        {
+            "startline": 67,
+            "endline": 82,
+            "file": "src/Text/Pandoc/Writers/LaTeX.hs",
+            "module": "Text.Pandoc.Writers.LaTeX",
+            "function": "isolateBigNotes"
+        },
+        
+        {
+            "startline": 84,
+            "endline": 94,
+            "file": "src/Text/Pandoc/Writers/LaTeX.hs",
+            "module": "Text.Pandoc.Writers.LaTeX",
+            "function": "raiseBigNotes"
+        },
+        {
+            "startline": 99,
+            "endline": 99,
+            "file": "src/Text/Pandoc/Writers/LaTeX.hs",
+            "module": "Text.Pandoc.Writers.LaTeX",
+            "function": "writeLaTeX "
+        }
+    ]
+}
