@@ -1,0 +1,38 @@
+{
+    "id": "duckling-4",
+    "repositoryurl": "https://github.com/facebook/duckling.git",
+    "repository": "duckling",
+    "license": "BSD",
+    "faultcommit": "f2798021b6a2f0a3ab15797e924830ccf52344f3",
+    "fixcommit": "28ddc3bff7adf68474552c726c5dba1e0d9cbbd4",
+    
+    "ghcversion": "8.8.3",
+    "buildframework": "cabal",
+    "testframeworks": ["tasty", "tasty-hunit", "tasty-golden"],
+
+    "testpatch": true,
+    "description": "Duckling can parse multiple items, and sometimes these can be ambigious depending on their context. In the spanish, 'una hora' can either refer to 1PM or to 1 hour, which was not properly recognized before. The fix is to account for this ambiguity with the existing ambiguity logic.",
+    "categories": ["unit-test", "parsing", "ambiguity"],
+    
+    "relatedissues": [""],
+    "relatedprs": ["https://github.com/facebook/duckling/pull/504"],
+    
+    "faultlocations": [
+        {
+            "startline": 65,
+            "endline": 65,
+            "file": "Duckling/Numeral/NL/Rules.hs",
+            "module": "Duckling.Numeral.NL.Rules",
+            "function": "ruleDecimalWithThousandsSeparator  "
+        }
+    ],
+    "fixlocations": [
+        {
+            "startline": 65,
+            "endline": 65,
+            "file": "Duckling/Numeral/NL/Rules.hs",
+            "module": "Duckling.Numeral.NL.Rules",
+            "function": "ruleDecimalWithThousandsSeparator  "
+        }
+    ]
+}

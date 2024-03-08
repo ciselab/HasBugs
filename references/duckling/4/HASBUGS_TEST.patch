@@ -1,0 +1,64 @@
+From 31b0e55f1d0748b728a0816100f6d9dd08397cc0 Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Fri, 23 Feb 2024 18:42:11 +0100
+Subject: [PATCH 1/1] test-failure-upgrade
+
+---
+ Duckling/AmountOfMoney/NL/Corpus.hs |  2 ++
+ Duckling/Numeral/NL/Corpus.hs       | 13 +++++++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/Duckling/AmountOfMoney/NL/Corpus.hs b/Duckling/AmountOfMoney/NL/Corpus.hs
+index 7e2250a2..e5e3c030 100644
+--- a/Duckling/AmountOfMoney/NL/Corpus.hs
++++ b/Duckling/AmountOfMoney/NL/Corpus.hs
+@@ -46,6 +46,8 @@ allExamples = concat
+              [ "$10K"
+              , "10k$"
+              , "$10000"
++             , "$10.000"
++             , "$10.000,00"
+              , "10000,00 $"
+              ]
+   , examples (simple USD 3.14)
+diff --git a/Duckling/Numeral/NL/Corpus.hs b/Duckling/Numeral/NL/Corpus.hs
+index f203db5b..0f99b172 100644
+--- a/Duckling/Numeral/NL/Corpus.hs
++++ b/Duckling/Numeral/NL/Corpus.hs
+@@ -76,6 +76,14 @@ allExamples = concat
+              [ "0,77"
+              , ",77"
+              ]
++  , examples (NumeralValue 100000)
++             [ "100.000"
++             , "100.000,0"
++             , "100000"
++             , "100k"
++             , "100K"
++             , "honderd duizend"
++             ]
+   , examples (NumeralValue 300)
+              [ "3 honderd"
+              , "drie honderd"
+@@ -83,6 +91,8 @@ allExamples = concat
+   , examples (NumeralValue 5000)
+              [ "5 duizend"
+              , "vijf duizend"
++             , "5.000"
++             , "5.000,00"
+              ]
+   , examples (NumeralValue 144)
+              [ "gros"
+@@ -94,6 +104,9 @@ allExamples = concat
+              ]
+   , examples (NumeralValue 20000)
+              [ "twintig duizend"
++             , "20.000"
++             , "20000"
++             , "20.000,00"
+              ]
+   , examples (NumeralValue 0.2)
+              [ "1/5"
+-- 
+2.25.1
+
