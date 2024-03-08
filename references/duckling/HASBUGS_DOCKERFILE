@@ -1,0 +1,9 @@
+FROM haskell:8.10.7
+
+
+RUN cabal update
+RUN cabal configure --enable-tests
+RUN cabal install --only-dependencies 
+RUN cabal build
+
+ENTRYPOINT ["cabal","test"]

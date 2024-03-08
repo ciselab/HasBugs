@@ -1,0 +1,45 @@
+From 7b093f4a80fdaa2d2bd989647188b40e5cc6946c Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Thu, 14 Dec 2023 09:43:41 +0100
+Subject: [PATCH 1/1] upgrade-to-failing-test
+
+---
+ Duckling/Duration/EN/Corpus.hs | 10 ++++++++++
+ tests/TestMain.hs              |  2 +-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/Duckling/Duration/EN/Corpus.hs b/Duckling/Duration/EN/Corpus.hs
+index c1bef3b3..f661f5b6 100644
+--- a/Duckling/Duration/EN/Corpus.hs
++++ b/Duckling/Duration/EN/Corpus.hs
+@@ -120,4 +120,14 @@ allExamples = concat
+              , "five and half min"
+              , "5 and an half minute"
+              ]
++  , examples (DurationData 105 Minute)
++              [ "an hour and 45 minutes"
++              , "one hour and 45 minutes"
++              ]
++  , examples (DurationData 90 Second)
++              [ "a minute and 30 seconds"
++              , "one minute and 30 seconds"
++              ]
++  , examples (DurationData 3630 Second)
++              [ "an hour and 30 seconds"]
+   ]
+diff --git a/tests/TestMain.hs b/tests/TestMain.hs
+index 03ca9d47..1e356035 100644
+--- a/tests/TestMain.hs
++++ b/tests/TestMain.hs
+@@ -4,7 +4,7 @@
+ -- This source code is licensed under the BSD-style license found in the
+ -- LICENSE file in the root directory of this source tree.
+ 
+-module TestMain where
++module Main where
+ 
+ import Data.String
+ import Test.Tasty
+-- 
+2.25.1
+

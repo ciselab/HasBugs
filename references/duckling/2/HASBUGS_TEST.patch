@@ -1,0 +1,59 @@
+From 417f90d2bfee2291a15af05bcd937066964fefef Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Fri, 8 Mar 2024 14:58:29 +0100
+Subject: [PATCH 1/1] HASBUGS_TEST
+
+---
+ Duckling/Time/ES/Corpus.hs      | 16 +++++++++++++++-
+ tests/Duckling/Time/ES/Tests.hs |  1 +
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/Duckling/Time/ES/Corpus.hs b/Duckling/Time/ES/Corpus.hs
+index 64f01e65..edf062d7 100644
+--- a/Duckling/Time/ES/Corpus.hs
++++ b/Duckling/Time/ES/Corpus.hs
+@@ -9,6 +9,7 @@
+ 
+ module Duckling.Time.ES.Corpus
+   ( corpus
++  , latentCorpus
+   ) where
+ 
+ import Data.String
+@@ -19,9 +20,22 @@ import Duckling.Resolve
+ import Duckling.Time.Corpus
+ import Duckling.TimeGrain.Types hiding (add)
+ import Duckling.Testing.Types hiding (examples)
++import Duckling.Time.Types hiding (Month)
++
++context :: Context
++context = testContext {locale = makeLocale ES Nothing}
++
++latentCorpus :: Corpus
++latentCorpus = (context, testOptions {withLatent = True}, xs)
++  where
++    xs = concat
++      [ examples (datetime (2013, 2, 12, 13, 0, 0) Hour)
++                 [ "una hora"
++                 ]
++      ]
+ 
+ corpus :: Corpus
+-corpus = (testContext {locale = makeLocale ES Nothing}, testOptions, allExamples)
++corpus = (context, testOptions, allExamples)
+ 
+ allExamples :: [Example]
+ allExamples = concat
+diff --git a/tests/Duckling/Time/ES/Tests.hs b/tests/Duckling/Time/ES/Tests.hs
+index abead46a..b7fd1123 100644
+--- a/tests/Duckling/Time/ES/Tests.hs
++++ b/tests/Duckling/Time/ES/Tests.hs
+@@ -19,4 +19,5 @@ import Duckling.Time.ES.Corpus
+ tests :: TestTree
+ tests = testGroup "ES Tests"
+   [ makeCorpusTest [This Time] corpus
++    , makeCorpusTest [This Time] latentCorpus
+   ]
+-- 
+2.25.1
+

@@ -1,0 +1,56 @@
+{
+    "id": "duckling-3",
+    "repositoryurl": "https://github.com/facebook/duckling.git",
+    "repository": "duckling",
+    "license": "BSD",
+    "faultcommit": "1dac46a8ce001d9f12361ba9b138805de514b072",
+    "fixcommit": "4cfe88ead1350ef9e5e3ad68eeba6d0b31fc662d",
+    
+    "ghcversion": "8.6.3",
+    "buildframework": "cabal",
+    "testframeworks": ["tasty", "tasty-hunit", "tasty-golden"],
+
+    "testpatch": true,
+    "description": "Duckling recognizes times mentioned in a text, but fails to (extensively) parse combined times such as `2 hours and 30 minutes`. Instead of parsing it to 150 minutes, it is parsed into 120 minutes and 30 minutes. The fix adds combinator rules based on keywords and changes the rule-application-order.",
+    "categories": ["unit-test", "time", "parsing"],
+    
+    "relatedissues": [""],
+    "relatedprs": ["https://github.com/facebook/duckling/pull/483"],
+    
+    "faultlocations": [
+        {
+            "startline": 245,
+            "endline": 245,
+            "file": "Duckling/Duration/EN/Rules.hs",
+            "module": "Duckling.Duration.EN.Rules",
+            "function": "rules"
+        },{
+            "startline": 260,
+            "endline": 260,
+            "file": "Duckling/Duration/EN/Rules.hs",
+            "module": "Duckling.Duration.EN.Rules",
+            "function": "rules"
+        }
+    ],
+    "fixlocations": [
+        {
+            "startline": 261,
+            "endline": 262,
+            "file": "Duckling/Duration/EN/Rules.hs",
+            "module": "Duckling.Duration.EN.Rules",
+            "function": "rules"
+        },{
+            "startline": 277,
+            "endline": 277,
+            "file": "Duckling/Duration/EN/Rules.hs",
+            "module": "Duckling.Duration.EN.Rules",
+            "function": "rules"
+        },{
+            "startline": 243,
+            "endline": 258,
+            "file": "Duckling/Duration/EN/Rules.hs",
+            "module": "Duckling.Duration.EN.Rules",
+            "function": "ruleCompositeDurationAnd"
+        }
+    ]
+}

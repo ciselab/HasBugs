@@ -1,0 +1,15 @@
+FROM haskell:8.6.5
+
+WORKDIR /build
+COPY . .
+RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" > /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -y install software-properties-common apt-transport-https lsb-release ca-certificates
+RUN add-apt-repository ppa:ondrej/php
+RUN apt-get install -y libpcre3 libpcre3-dev
+
+RUN cabal update
+RUN cabal v2-install --only-dependencies
+RUN cabal v2-build
+
+ENTRYPOINT ["cabal","v2-test"]

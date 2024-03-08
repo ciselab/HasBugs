@@ -1,0 +1,25 @@
+From e488f7606b2f45421874a0497b2380ab38c93cec Mon Sep 17 00:00:00 2001
+From: lapplislazuli <Leonhard.Applis@Protonmail.com>
+Date: Thu, 8 Feb 2024 09:38:48 +0100
+Subject: [PATCH 1/1] Fault-Upgrade
+
+---
+ Duckling/Numeral/DE/Corpus.hs | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/Duckling/Numeral/DE/Corpus.hs b/Duckling/Numeral/DE/Corpus.hs
+index b051b935..be6e2d3a 100644
+--- a/Duckling/Numeral/DE/Corpus.hs
++++ b/Duckling/Numeral/DE/Corpus.hs
+@@ -140,7 +140,6 @@ allExamples = concat
+              [ "1.416,15"
+              ]
+   , examples (NumeralValue 1000000.0)
+-             [ "1.000.000,00",
+-               "eine million"
++             [ "1.000.000,00"
+              ]
+   ]
+-- 
+2.25.1
+

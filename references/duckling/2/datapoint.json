@@ -1,0 +1,38 @@
+{
+    "id": "duckling-2",
+    "repositoryurl": "https://github.com/facebook/duckling.git",
+    "repository": "duckling",
+    "license": "BSD",
+    "faultcommit": "a93cae1c02c28c51e5bce1f03132a211bbda7dce",
+    "fixcommit": "1dac46a8ce001d9f12361ba9b138805de514b072",
+    
+    "ghcversion": "8.6.3",
+    "buildframework": "cabal",
+    "testframeworks": ["tasty", "tasty-hunit", "tasty-golden"],
+
+    "testpatch": true,
+    "description": "Duckling can parse multiple items, and sometimes these can be ambigious depending on their context. In the spanish, 'una hora' can either refer to 1PM or to 1 hour, which was not properly recognized before. The fix is to account for this ambiguity with the existing ambiguity logic.",
+    "categories": ["unit-test", "time", "parsing", "ambiguity"],
+    
+    "relatedissues": [""],
+    "relatedprs": ["https://github.com/facebook/duckling/pull/478"],
+    
+    "faultlocations": [
+        {
+            "startline": 869,
+            "endline": 869,
+            "file": "Duckling/Time/ES/Rules.hs",
+            "module": "Duckling.Time.ES.Rules",
+            "function": "ruleTimeofdayHoras "
+        }
+    ],
+    "fixlocations": [
+        {
+            "startline": 869,
+            "endline": 869,
+            "file": "Duckling/Time/ES/Rules.hs",
+            "module": "Duckling.Time.ES.Rules",
+            "function": "ruleTimeofdayHoras "
+        }
+    ]
+}

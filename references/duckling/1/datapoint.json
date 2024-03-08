@@ -1,0 +1,38 @@
+{
+    "id": "duckling-1",
+    "repositoryurl": "git@github.com:facebook/duckling",
+    "repository": "duckling",
+    "license": "BSD",
+    "faultcommit": "c6a48a1d0678a389f86d17db2676e1a289e355ce",
+    "fixcommit": "ea8a4f6d3b5bac8ffed1ee339126c2fdb375ded5",
+    
+    "ghcversion": "8.10.7",
+    "buildframework": "cabal",
+    "testframeworks": ["tasty", "tasty-hunit", "tasty-golden"],
+
+    "testpatch": true,
+    "description": "Duckling tries to recognize quantities and numbers, including 'millions' in german language. The previous regex did not account for millions, which use a different (rarer) pronomina. The fix is to adjust the regex with an additional case.",
+    "categories": ["unit-test", "language", "regex"],
+    
+    "relatedissues": [""],
+    "relatedprs": ["https://github.com/facebook/duckling/pull/684", "https://github.com/facebook/duckling/pull/682"],
+    
+    "faultlocations": [
+        {
+            "startline": 258,
+            "endline": 258,
+            "file": "Duckling/Numeral/DE/Rules.hs",
+            "module": "Duckling.Numeral.DE.Rules",
+            "function": "ruleZeroToNineteen"
+        }
+    ],
+    "fixlocations": [
+        {
+            "startline": 258,
+            "endline": 258,
+            "file": "Duckling/Numeral/DE/Rules.hs",
+            "module": "Duckling.Numeral.DE.Rules",
+            "function": "ruleZeroToNineteen"
+        }
+    ]
+}
