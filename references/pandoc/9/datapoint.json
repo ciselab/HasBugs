@@ -1,0 +1,45 @@
+{
+    "id": "pandoc-9",
+    "repositoryurl": "https://github.com/jgm/pandoc.git",
+    "repository": "pandoc",
+    "license": "GPLv2",
+    "faultcommit": "aa9577074357c7938c5a4a7e820bd12c90c0d32b",
+    "fixcommit": "3be253fb90deb8ca746156a3b281e5983fc6e8cf",
+    
+    "ghcversion": "9.4.8",
+    "buildframework": "stack",
+    "testframeworks": ["tasty", "tasty-golden", "tasty-hunit", "tasty-quickcheck"],
+
+    "testpatch": true,
+    "description": "Pandoc tries to keep all highlighting when transforming documents, but often features collide. One such collision are italic multi-block footnotes in Latex, which were not correctly transformed when coming from markdown. The fix is to re-order things in the Latex-Writer.",
+    "categories": ["feature-collision", "unit-test", "formatting"],
+    
+    "relatedissues": ["https://github.com/jgm/pandoc/issues/8982"],
+    "relatedprs": ["https://github.com/jgm/pandoc/pull/9168"],
+    
+    "faultlocations" : [
+    {
+        "startline": 71,
+        "endline": 71,
+        "file" : "./src/Text/Pandoc/Writers/LaTeX.hs",
+        "module" : "Text.Pandoc.Writers.LaTeX",
+        "function": "writeLaTeX"
+    }
+    ],
+    "fixlocations" : [
+    {
+        "startline": 67,
+        "endline": 94,
+        "file" : "./src/Text/Pandoc/Writers/LaTeX.hs",
+        "module" : "Text.Pandoc.Writers.LaTeX",
+        "function": "writeLaTeX"
+    },
+    {
+        "startline": 99,
+        "endline": 99,
+        "file" : "./src/Text/Pandoc/Writers/LaTeX.hs",
+        "module" : "Text.Pandoc.Writers.LaTeX",
+        "function": "writeLaTeX"
+    }
+    ]
+}
